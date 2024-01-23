@@ -22,7 +22,6 @@ function Todo(props) {
         <div className="todoTitle">{title}</div>
         <div className="todoContent">{content}</div>
         <CustomBtn className="del-btn" onClick={() => firstHandler(todo.id)}>
-          {/* 꼭 todo.id..로 todo넘겨서 해야하나?_됨  /  key로 받으면 안되나.. 안되는듯 */}
           {firstBtn}
         </CustomBtn>
         <CustomBtn className="done-btn" onClick={() => secondHandler(todo.id)}>
@@ -36,10 +35,7 @@ function Todo(props) {
       <div key={key} className="doneTodo-box">
         <div className="todoTitle">{title}</div>
         <div className="todoContent">{content}</div>
-        <CustomBtn
-          className="del-btn"
-          onClick={() => firstHandler(todo.id)} // 이렇게 쓰는거 이해안됨 다시
-        >
+        <CustomBtn className="del-btn" onClick={() => firstHandler(todo.id)}>
           {firstBtn}
         </CustomBtn>
         <CustomBtn

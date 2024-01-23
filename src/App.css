@@ -66,10 +66,23 @@
 }
 
 header {
-  font-family: "Pretendard-Regular";
+  font-family: "Pretendard-Regular"; /*적용안돼 따로 부여*/
   display: flex;
   justify-content: space-between; /*자식요소의 양 끝과 부모요소 사이의 공간을 제외한 자식요소 사이의 간격을 일정하게 벌림*/
   margin: 10px;
+}
+
+.headerTitle {
+  font-size: 23px;
+  font-weight: bold;
+  margin-left: 20px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+.headerName {
+  font-size: smaller;
+  margin-top: 10px;
+  color: slategray;
 }
 
 .TodoInsert {
@@ -78,7 +91,6 @@ header {
   display: flex;
   justify-content: space-around; /*자식요소 기준 주위 공간을 일정 간격으로 벌림*/
   /* text-align: center; 안먹힘*/
-  line-height: 1.5;
   padding: 10px;
   border-radius: 15px;
 }
@@ -91,18 +103,33 @@ header {
   font-family: "Pretendard-Regular"; /*적용안돼 따로 부여*/
   font-size: medium;
   font-weight: bold;
-  margin: 15px;
+  margin-right: 15px;
+  margin-top: 20px;
+}
+
+input {
+  height: 30px;
+  font-size: 15px;
+  margin-top: 15px;
 }
 
 main {
   margin: 20px;
 }
 
-.workingTodo-box {
-  border: 2px solid salmon;
+.list {
+  display: flex;
+  margin-top: 10px;
+}
+
+.workingTodo-box,
+.doneTodo-box {
+  background-color: beige;
+  border: none;
   border-radius: 5px;
-  width: 200px;
-  min-height: 100px;
+  width: 250px;
+  min-height: 150px;
+  margin-right: 15px;
 }
 
 .doneTodoList {
@@ -114,12 +141,52 @@ main {
   font-weight: bold;
 }
 
+.todoTitle {
+  font-size: large;
+  font-weight: bold;
+  margin: 20px;
+  line-height: 1.5em;
+}
+
+.todoContent {
+  margin: 20px;
+  line-height: 1.5em;
+  min-height: 20px;
+}
+
 .add-btn,
 .del-btn,
 .done-btn,
 .working-btn {
   font-size: medium;
-  background-color: beige;
-  border: 2px solid lightslategray;
+  background-color: lightyellow;
+  border: 2px solid rgb(223, 173, 168);
   border-radius: 10px;
+}
+
+.add-btn {
+  background-color: lightyellow;
+  border: none;
+  width: 150px;
+  height: 40px;
+  margin-top: 10px;
+}
+
+.del-btn,
+.done-btn,
+.working-btn {
+  margin: 10px;
+  width: 100px;
+  height: 30px;
+}
+
+.del-btn:hover {
+  background-color: rgb(250, 95, 67);
+  color: white;
+}
+
+.done-btn:hover,
+.working-btn:hover {
+  background-color: rgb(104, 104, 250);
+  color: white;
 }

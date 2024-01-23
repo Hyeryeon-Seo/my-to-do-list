@@ -5,11 +5,17 @@ import "./App.css";
 // Todo 컴포넌트
 import CustomInput from "./components/Input";
 import CustomBtn from "./components/CustomBtn";
+import Todo from "./components/Todo";
 
 function App() {
   const [todoList, setTodoList] = useState([
-    { id: 0, title: "", content: "", isDone: false },
-    { id: 1, title: "리액트뿌셔", content: "2회독가자", isDone: true },
+    // { id: 0, title: "", content: "", isDone: false },
+    {
+      id: 0,
+      title: "리액트 강의 2회독하기",
+      content: "1월 내로 리액트 강의내용 내 걸로 만들기 !",
+      isDone: true,
+    },
   ]); // 띄울 todolist?
   // 입력한 to-do를 담을 상태
 
@@ -67,7 +73,13 @@ function App() {
 
   // Done 버튼 (할 일 완료) => 해당id의 todo 의 key값, isDone의 value값을 false -> true 로 변경
   const doneTodoHandler = (id) => {
-    const newDoneTodo
+    const newDoneTodo = {
+      id: id,
+      title: title,
+      content: content,
+      isDone: true,
+    };
+
     // Done 구역에 뜨도록 렌더링 ? 되어야
     // 이버튼 누를 당시의 id (아래에서보면, map함수로 하나하나 돌고있던 중)
     // id받았는데 그럼 map이나 filter써야?
@@ -75,7 +87,7 @@ function App() {
     // id 일치하면 true로 바꿔줘야하나..여튼 그럼 todoList를 따로 써주긴해야할듯? 거기서 todo뽑아서.. todo객체가 우선 필요
     // todoList.filter((todo) => {todo.id === })
     // todoList[id].setDone(true); => 에러 // [id=index]니까 이걸로 접근해서 해당 객체 하나(todo?)에서 setDone?..
-    console.log(todoList[id].isDone); // 콘솔찍어보면 그대로 false임   ?!?
+    // console.log(todoList[id].isDone); // 콘솔찍어보면 그대로 false임   ?!?
     // const doneTodoList = todoList.filter((todo) => todo.isDone === true); // 여기서 선언 맞나
     // setTodoList(doneTodoList); // done to-do list 보여주기 (set..으로 갈아끼우기) -> done아닌 working to-do도 다 보여줘야하는데
     // done으로 아예 todolist를 갈아끼우는 건 아닌거같다.  => 그래서 done 완료버튼 누르면 다 사라지는듯 (근데 donetodolist에 아무것도 없는상태?왜지)
@@ -93,16 +105,24 @@ function App() {
     //   content: dt.content,
     // };
 
-    setTodoList(todoList);
+    setTodoList([...todoList, newDoneTodo]);
   };
 
-  const cancelDoneTodoHandler = (id) => {};
+  const cancelDoneTodoHandler = (id) => {
+    const newWorkingTodo = {
+      id: id,
+      title: title,
+      content: content,
+      isDone: false,
+    };
+    setTodoList([...todoList, newWorkingTodo]);
+  };
 
   return (
     <div className="app-container">
       <header>
-        <div>My To-Do List</div>
-        <div>React 4기 서혜련</div>
+        <div className="headerTitle">My To-do List</div>
+        <div className="headerName">React 4기 서혜련</div>
       </header>
       <section>
         <form className="TodoInsert" onSubmit={onSubmit}>
@@ -131,7 +151,7 @@ function App() {
       <main>
         <div className="workingTodoList">
           <div className="listTitle">Working 🏃‍♀️</div>
-          <div>
+          <div className="list">
             {todoList
               .filter((todo) => todo.isDone === false)
               .map((todo) => {
@@ -139,31 +159,43 @@ function App() {
                 return (
                   //ㅜ 원래 여기에 return이 들어가나.. map함수 => {} 그냥 리턴 필요없지만, 실제로 이 안을 실행하는게 아니라
                   // 이걸 뱉어야(반환)하기때문인걸까.
-                  <div key={todo.id} className="workingTodo-box">
+                  <Todo
+                    className="workingTodo-box"
+                    todo={todo}
+                    key={todo.id}
+                    title={todo.title}
+                    content={todo.content}
+                    firstHandler={deleteTodoHandler}
+                    secondHandler={doneTodoHandler}
+                    firstBtn="삭제"
+                    secondBtn="완료"
+                  />
+                  /* } <div key={todo.id} className="workingTodo-box">
                     <div>{todo.title}</div>
                     <div>{todo.content}</div>
                     <CustomBtn
                       className="del-btn"
                       onClick={() => deleteTodoHandler(todo.id)} // 이렇게 쓰는거 이해안됨 다시
                     >
-                      {/*어렵다..onClick={({todo.id}) => deleteTodoHandler()}  위엔 또 todo.id에 {} 필요없나*/}
-                      삭제
+                      {/*어렵다..onClick={({todo.id}) => deleteTodoHandler()}  위엔 또 todo.id에 {} 필요없나*/
+                  /*삭제
                     </CustomBtn>
                     <CustomBtn
                       className="done-btn"
                       onClick={() => doneTodoHandler(todo.id)}
-                    >
+                    >.content
                       완료
                     </CustomBtn>
-                    {/*done어렵다 */}
+                    /*done어렵다 }
                   </div>
+                ); */
                 );
               })}
           </div>
         </div>
         <div className="doneTodoList">
           <div className="listTitle">Done 🎉</div>
-          <div>
+          <div className="list">
             {/* doneTodoList 따로 여기서 불러도되나 함수안에선언됐는데 => 역시 에러. not defined로 뜸
              {doneTodoList.map((todo) => {  그게아니고, 원래의 todoList에서- isDone=true 인 것들만 불러와야
              그냥 doneTodoList 같은거 또 선언 밖에.. 
@@ -173,7 +205,17 @@ function App() {
               .map((todo) => {
                 // 그리고 그 조건 하의 배열의 요소 하나하나 도는 것
                 return (
-                  <div key={todo.id}>
+                  <Todo
+                    className="doneTodo-box"
+                    key={todo.id}
+                    title={todo.title}
+                    content={todo.content}
+                    firstHandler={deleteTodoHandler}
+                    secondHandler={cancelDoneTodoHandler}
+                    firstBtn="삭제"
+                    secondBtn="완료 취소"
+                  />
+                  /* <div key={todo.id} className="doneTodo-box">
                     <div>{todo.title}</div>
                     <div>{todo.content}</div>
                     <CustomBtn
@@ -188,7 +230,7 @@ function App() {
                     >
                       완료 취소
                     </CustomBtn>
-                  </div>
+                  </div> */
                 );
               })}
           </div>

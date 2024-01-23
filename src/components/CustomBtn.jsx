@@ -1,4 +1,7 @@
 import React from "react";
+import App from "../App";
+// import Todo from "./Todo";
+// Todo 컴포넌트 에서 props 내려주니까 여기도 import?? 아닌듯
 
 function CustomBtn(props) {
   // props 다시 자세히이해해봐야할듯

@@ -12,7 +12,7 @@ function CustomInput(props) {
       value={value}
       onChange={onChange}
       placeholder={placeholder}
-    ></input>
+    />
   );
 }
 

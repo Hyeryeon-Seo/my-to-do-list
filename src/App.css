@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,91 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+/* reset.css 먼저 적용, 폰트 추가 */
+
+/*@font-face {
+  src: url("https://fonts.googleapis.com/earlyaccess/notosanskr.css");
+  font-family: "Noto Sans KR", sans-serif;
+} */
+
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+* {
+  font-family: "Pretendard-Regular";
+}
+
+.app-container {
+  max-width: 1200px;
+  min-width: 800px;
+  display: flex;
+  flex-direction: column; /* 내부 컨텐츠 세로 정렬 */
+  /* justify-content: center; /* 내부 컨텐츠 모두 가운데 정렬 - 해봤자인.. */
+  margin: 10px;
+}
+
+header {
+  font-family: "Pretendard-Regular";
+  display: flex;
+  justify-content: space-between; /*자식요소의 양 끝과 부모요소 사이의 공간을 제외한 자식요소 사이의 간격을 일정하게 벌림*/
+  margin: 10px;
+}
+
+.TodoInsert {
+  background-color: rgb(248, 175, 146);
+  height: 70px;
+  display: flex;
+  justify-content: space-around; /*자식요소 기준 주위 공간을 일정 간격으로 벌림*/
+  /* text-align: center; 안먹힘*/
+  line-height: 1.5;
+  padding: 10px;
+  border-radius: 15px;
+}
+
+.inputBox {
+  display: flex;
+}
+
+.inputText {
+  font-family: "Pretendard-Regular"; /*적용안돼 따로 부여*/
+  font-size: medium;
+  font-weight: bold;
+  margin: 15px;
+}
+
+main {
+  margin: 20px;
+}
+
+.workingTodo-box {
+  border: 2px solid salmon;
+  border-radius: 5px;
+  width: 200px;
+  min-height: 100px;
+}
+
+.doneTodoList {
+  margin-top: 20px;
+}
+
+.listTitle {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.add-btn,
+.del-btn,
+.done-btn,
+.working-btn {
+  font-size: medium;
+  background-color: beige;
+  border: 2px solid lightslategray;
+  border-radius: 10px;
 }

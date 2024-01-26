@@ -1,7 +1,7 @@
 import React from "react";
-import "../App.jsx"; // App.jsx의 함수 등 사용
 import CustomBtn from "./CustomBtn";
 // 여기서 CustomBtn 사용해서..(CustomBtn으로 props 내려주기) import
+//App.jsx 나 TodoController 등 상위 컴포넌트 - import하는게 아니다. 오히려 여기서 export해서 상위컴포넌트에서 import (여기서는 상위컴의 props 내려받아 사용)
 function Todo(props) {
   const {
     type,

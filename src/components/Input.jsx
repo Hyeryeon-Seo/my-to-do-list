@@ -17,3 +17,11 @@ function CustomInput(props) {
 }
 
 export default CustomInput;
+
+/* form 태그 쓰면 엔터만 눌러도 제출이 된다
+button type="submit" 으로해주기
+handleSubmit 과같은 함수 만들어서 e.preventDefault 해주기
+
+input태그에 type placeholder name="title" 이런식으로
+
+*/

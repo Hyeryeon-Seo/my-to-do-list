@@ -1,7 +1,4 @@
-/* .App {
-  text-align: center;
-}
-
+/*
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -28,21 +25,9 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 } */
 
 /* reset.css 먼저 적용, 폰트 추가 */
-
-/*@font-face {
-  src: url("https://fonts.googleapis.com/earlyaccess/notosanskr.css");
-  font-family: "Noto Sans KR", sans-serif;
-} */
 
 @font-face {
   font-family: "Pretendard-Regular";

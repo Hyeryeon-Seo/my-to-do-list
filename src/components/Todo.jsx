@@ -4,7 +4,7 @@ import CustomBtn from "./CustomBtn";
 // 여기서 CustomBtn 사용해서..(CustomBtn으로 props 내려주기) import
 function Todo(props) {
   const {
-    className,
+    type,
     todo,
     key,
     title,
@@ -15,7 +15,9 @@ function Todo(props) {
     secondBtn,
   } = props; // 구조분해할당
 
-  if (className === "workingTodo-box") {
+  if (type === "working") {
+    //
+    // = ? ==? 위 구조분해할당, type = "working" (변수할당됨) no!!!  ==
     return (
       // Working 리스트
       <div key={key} className="workingTodo-box">

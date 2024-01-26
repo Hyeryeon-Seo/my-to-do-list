@@ -2,13 +2,13 @@ import React, { useState } from "react";
 
 import "./reset.css";
 import "./App.css";
+import Header from "./components/layout/Header";
 import CustomInput from "./components/Input";
 import CustomBtn from "./components/CustomBtn";
 import Todo from "./components/Todo";
 
 function App() {
   const [todoList, setTodoList] = useState([
-    // { id: 0, title: "", content: "", isDone: false },
     {
       id: 0,
       title: "리액트 강의 2회독하기",
@@ -20,20 +20,21 @@ function App() {
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  // const [doneTodo, setDoneTodo] = useState([]);
 
-  const onTitleChangeHandler = (event) => {
+  const handleTitleInputChange = (event) => {
+    // 개선: 이벤트핸들러함수명 컨벤션따라 변경
     setTitle(event.target.value);
   };
 
-  const onContentChangeHandler = (event) => {
+  const handleContentInputChange = (event) => {
+    // 개선: 이벤트핸들러함수명 컨벤션따라 변경
     setContent(event.target.value);
   };
 
   // 추가하기 버튼 addTodoHandler
   const addTodoHandler = () => {
     const newTodo = {
-      id: todoList.length,
+      id: crypto.randomUUID(), // id: todoList.length -id 중복 가능성 -> 개선: 고유한id부여- Date.now()도 가능 & crypto.randomUUID() 사용
       title: title, // input에 입력된 title,body - setTitle,setBody로 title,body 설정됨 (초기값에서)
       content: content,
       isDone: false,
@@ -43,10 +44,12 @@ function App() {
 
   // 추가 버튼 클릭 시 기존 input 빈칸의 글자 초기화
   const onSubmit = (e) => {
-    setTitle(""); // title 초기화
-    setContent(""); // body 초기화
-    //기본이벤트(새로고침) 방지
+    //기본이벤트(페이지이동) 방지
     e.preventDefault();
+
+    // setTitle(""); // title 초기화
+    // setContent(""); // body 초기화
+    e.target.reset(); // 개선(다른방법): form태그 내 (제출시) input 초기화 _form태그로 가능한 메서드
   };
 
   const deleteTodoHandler = (id) => {
@@ -77,78 +80,8 @@ function App() {
 
   return (
     <div className="app-container">
-      <header>
-        <div className="headerTitle">My To-do List</div>
-        <div className="headerName">React 4기 서혜련</div>
-      </header>
-      <section>
-        <form className="TodoInsert" onSubmit={onSubmit}>
-          <div className="inputBox">
-            <div className="inputText">제목</div>
-            <CustomInput
-              value={title}
-              onChange={onTitleChangeHandler}
-              placeholder=" title ..."
-            />
-          </div>
-          <div className="inputBox">
-            <div className="inputText">내용</div>
-            <CustomInput
-              value={content}
-              onChange={onContentChangeHandler}
-              placeholder=" content ..."
-            />
-          </div>
-          <CustomBtn className="add-btn" onClick={addTodoHandler}>
-            추가하기
-          </CustomBtn>
-        </form>
-      </section>
-      <main>
-        <div className="workingTodoList">
-          <div className="listTitle">Working 🏃‍♀️</div>
-          <div className="list">
-            {todoList
-              .filter((todo) => todo.isDone === false)
-              .map((todo) => {
-                return (
-                  <Todo
-                    className="workingTodo-box"
-                    todo={todo}
-                    key={todo.id}
-                    title={todo.title}
-                    content={todo.content}
-                    firstHandler={deleteTodoHandler}
-                    secondHandler={doneTodoHandler}
-                    firstBtn="삭제"
-                    secondBtn="완료"
-                  />
-                );
-              })}
-          </div>
-        </div>
-        <div className="doneTodoList">
-          <div className="listTitle">Done 🎉</div>
-          <div className="list">
-            {todoList
-              .filter((todo) => todo.isDone === true)
-              .map((todo) => {
-                return (
-                  <Todo
-                    className="doneTodo-box"
-                    key={todo.id}
-                    title={todo.title}
-                    content={todo.content}
-                    firstHandler={deleteTodoHandler}
-                    secondHandler={cancelDoneTodoHandler}
-                    firstBtn="삭제"
-                    secondBtn="완료 취소"
-                  />
-                );
-              })}
-          </div>
-        </div>
-      </main>
+      <Header />{" "}
+      {/*개선:Header와 나머지Body전체 컴포넌트화, App.jsx 간결하게 바꿈*/}
     </div>
   );
 }

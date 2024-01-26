@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+# 📝 My Todo List 페이지 (React) 🐾
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+24.1.22 ~ 1.23 개인 프로젝트 + 1.25 ~ 개선 및 수정
 
-## Available Scripts
+### 🔗 vercel을 통한 리액트 사이트 배포 - URL : https://my-to-do-list-ecru.vercel.app/
 
-In the project directory, you can run:
+### 📌 기능 구현 상태
 
-### `npm start`
+- 추가하기 버튼 기능 구현 완료
+- 삭제 버튼 기능 구현 완료 (filter메서드 사용)
+- 완료, 완료 취소 버튼 구현하지 못함 -> 구현 완료 (toggle형식으로 완료<->취소 전환)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- useState hook 사용
+- Component 분리, props로 데이터 전달
+- filter, map 등의 배열 메서드 활용
+- 중복 가능성없는 고유한 id 부여로 수정 (crypto.randomUUID())
+- form 태그 유효성 검사 기능 추가, 추가/제출되었을 시 input값 초기화
+- css - flex-wrap으로 카드 줄바꿈 추가
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📌 기능 설명 - 컴포넌트 분리
 
-### `npm test`
+- Todo.jsx
+- CustomInput.jsx
+- CustomBtn.jsx
+- Header.jsx 추가
+- TodoController.jsx 추가
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+💡
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- App컴포넌트 > Header컴포넌트와 TodoCotroller컴포넌트만으로 구성해 간소화
+- TodoController컴포넌트 > form태그 안 CustomInput컴포넌트, CustomBtn컴포넌트, Todo컴포넌트 사용해 구성, 주요 기능 담당
+- Todo컴포넌트 > CustomBtn컴포넌트 사용해 구성

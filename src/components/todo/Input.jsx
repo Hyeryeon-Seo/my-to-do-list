@@ -1,7 +1,7 @@
 import React from "react";
 
 function CustomInput(props) {
-  const { value, onChange, placeholder } = props; // 구조분해할당
+  const { value, onChange, placeholder, name } = props; // 구조분해할당
   return (
     <input
       style={{
@@ -12,6 +12,7 @@ function CustomInput(props) {
       value={value}
       onChange={onChange}
       placeholder={placeholder}
+      name={name}
     />
   );
 }

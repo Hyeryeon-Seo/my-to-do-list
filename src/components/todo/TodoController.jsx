@@ -42,24 +42,28 @@ function TodoController() {
   const onSubmit = (e) => {
     //기본이벤트(페이지이동) 방지
     e.preventDefault();
-    // setTitle(""); // title 초기화
-    // setContent(""); // body 초기화
 
     // 개선: 유효성 검사 추가
     if (!title || !content) {
       alert("제목과 내용 모두 입력해주세요");
-      return; // 아래 else없이 그냥 return이면 의미 없다
+      // 이 경우 초기화없이 입력내용 유지시킴
+      return;
     } else {
       // 위의 경우가 아니라면 아래 실행
       // 아래 객체를 추가하기 함수에 넣어주기
       addTodoHandler({
         id: crypto.randomUUID(), // id: todoList.length -id 중복 가능성 -> 개선: 고유한id부여- Date.now()도 가능 & crypto.randomUUID() 사용
-        title: title, // input에 입력된 title,body - setTitle,setBody로 title,body 설정됨 (초기값에서)
-        content: content,
+        title, // input에 입력된 title,body - setTitle,setBody로 title,body 설정됨 (초기값에서)
+        content,
         isDone: false,
       });
+      setTitle(""); //초기화 - 개선: else케이스 안에 넣어서 추가(제출)되었을때만 초기화시킴
+      setContent("");
+      /* e.target.reset(); // 개선(다른방법): form태그 내 (제출시) input 초기화 _form태그로 가능한 메서드
+      근데 여기에 해도 밖에 해도 안 먹힌다, name도 부여해봤고 e.target.title.혹은 .value까지
+      해봤지만 실패 => 다시 setTitle 등을 쓰기로 했다
+      */
     }
-    e.target.reset(); // 개선(다른방법): form태그 내 (제출시) input 초기화 _form태그로 가능한 메서드
   };
 
   // 삭제 버튼: filter메서드로 해당id의 카드빼기
@@ -99,6 +103,7 @@ function TodoController() {
             value={title}
             onChange={handleTitleInputChange}
             placeholder=" title ..."
+            name="title"
           />
         </div>
         <div className="inputBox">
@@ -107,6 +112,7 @@ function TodoController() {
             value={content}
             onChange={handleContentInputChange}
             placeholder=" content ..."
+            name="content"
           />
         </div>
         {/* 아래버튼 속성 onClick={addTodoHandler}을 없애고

@@ -1,33 +1,11 @@
-/*
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* reset.css 먼저 적용 */
+@font-face {
+  font-family: "Pretendard-Light";
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Light.woff")
+    format("woff");
+  font-weight: 300;
+  font-style: normal;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-} */
-
-/* reset.css 먼저 적용, 폰트 추가 */
 
 @font-face {
   font-family: "Pretendard-Regular";
@@ -37,8 +15,27 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Pretendard-Bold";
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff")
+    format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Pretendard-Black";
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Black.woff")
+    format("woff");
+  font-weight: 900;
+  font-style: normal;
+}
+
 * {
   font-family: "Pretendard-Regular";
+  /*이렇게만하면 부여안되는 태그 발생 
+  아래에 .app-conatiner 최상위태그에 부여, 거의 적용되나 form태그 등만 안됨
+  그런경우 이 * 별 전체태그 따로 부여도 필요 */
 }
 
 .app-container {
@@ -48,6 +45,7 @@
   margin: 0 auto;
   min-width: 800px;
   max-width: 1200px;
+  font-family: "Pretendard-Regular"; /*전체태그적용위해 필요*/
 }
 
 main {
@@ -58,22 +56,24 @@ main {
 
 header {
   width: 1110px;
-  font-family: "Pretendard-Regular"; /*적용안돼 따로 부여*/
+  /*적용안돼 따로 부여*/
   display: flex;
   justify-content: space-between; /*자식요소의 양 끝과 부모요소 사이의 공간을 제외한 자식요소 사이의 간격을 일정하게 벌림 */
-  margin: 10px;
+  margin-top: 20px;
 }
 
 .headerTitle {
-  font-size: 23px;
-  font-weight: bold;
+  font-family: "Pretendard-Black"; /*두꺼운폰트적용*/
+  font-size: 25px;
+  font-weight: 900;
   margin-left: 20px;
   margin-top: 5px;
   margin-bottom: 10px;
 }
 .headerName {
-  font-size: smaller;
-  margin-top: 10px;
+  font-family: "Pretendard-Light";
+  font-size: 12px;
+  margin-top: 20px;
   color: slategray;
 }
 
@@ -92,7 +92,6 @@ form {
 }
 
 .inputText {
-  font-family: "Pretendard-Regular"; /*적용안돼 따로 부여*/
   font-size: medium;
   font-weight: bold;
   margin-right: 15px;

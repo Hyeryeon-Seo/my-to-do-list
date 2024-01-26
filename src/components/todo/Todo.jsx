@@ -16,8 +16,7 @@ function Todo(props) {
   } = props; // 구조분해할당
 
   if (type === "working") {
-    //
-    // = ? ==? 위 구조분해할당, type = "working" (변수할당됨) no!!!  ==
+    // === 주의
     return (
       // Working 리스트
       <div key={key} className="workingTodo-box">

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CustomInput from "./Input";
+import CustomInput from "./CustomInput";
 import CustomBtn from "./CustomBtn";
 import Todo from "./Todo";
 

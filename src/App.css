@@ -42,18 +42,25 @@
 }
 
 .app-container {
-  max-width: 1200px;
-  min-width: 800px;
   display: flex;
   flex-direction: column; /* 내부 컨텐츠 세로 정렬 */
-  /* justify-content: center; /* 내부 컨텐츠 모두 가운데 정렬 - 해봤자인.. */
+  align-items: center; /*이걸 해줘야 가로축 가운데 정렬 가능 (flex방향 column이라서*/
+  margin: 0 auto;
+  min-width: 800px;
+  max-width: 1200px;
+}
+
+main {
   margin: 10px;
+  width: 1110px;
+  /*min,max말고 이렇게 딱 정해줘야 가운데에 온다 ..*/
 }
 
 header {
+  width: 1110px;
   font-family: "Pretendard-Regular"; /*적용안돼 따로 부여*/
   display: flex;
-  justify-content: space-between; /*자식요소의 양 끝과 부모요소 사이의 공간을 제외한 자식요소 사이의 간격을 일정하게 벌림*/
+  justify-content: space-between; /*자식요소의 양 끝과 부모요소 사이의 공간을 제외한 자식요소 사이의 간격을 일정하게 벌림 */
   margin: 10px;
 }
 
@@ -70,12 +77,12 @@ header {
   color: slategray;
 }
 
-.TodoInsert {
-  background-color: rgb(248, 175, 146);
+form {
+  width: 100%;
+  background-color: rgb(245, 203, 169);
   height: 70px;
   display: flex;
   justify-content: space-around; /*자식요소 기준 주위 공간을 일정 간격으로 벌림*/
-  /* text-align: center; 안먹힘*/
   padding: 10px;
   border-radius: 15px;
 }
@@ -98,27 +105,48 @@ input {
   margin-top: 15px;
 }
 
-main {
-  margin: 20px;
+section {
+  /*설정안되는이유를 알았다, 카드가 아래로 못가서..*/
+  max-height: 1000px;
+  margin-top: 30px;
 }
+
+/* .workingTodoList {
+  display: flex;
+  justify-content: center;
+} */
 
 .list {
   display: flex;
   margin-top: 10px;
+  margin-left: 20px;
+  /* 최대 최소넓이는 리스트 뜨는 부분에만 적용*/
+  min-width: 800px;
+  max-width: 1200px;
+  flex-wrap: wrap; /*필수! 카드리스트 다음 줄 이동하게 해줌*/
 }
 
 .workingTodo-box,
 .doneTodo-box {
-  background-color: beige;
+  margin-top: 20px;
+  background-color: rgb(255, 248, 239);
   border: none;
   border-radius: 5px;
   width: 250px;
-  min-height: 150px;
+  min-height: 170px;
+  /* 내용길어지면 길어지도록하고 최소높이는설정*/
   margin-right: 15px;
 }
 
+/*추가: hover기능 카드와 추가버튼 그림자 주기 */
+.workingTodo-box:hover,
+.doneTodo-box:hover,
+.add-btn:hover {
+  box-shadow: 0px 0px 3px 1px lightcoral;
+}
+
 .doneTodoList {
-  margin-top: 20px;
+  margin-top: 50px;
 }
 
 .listTitle {

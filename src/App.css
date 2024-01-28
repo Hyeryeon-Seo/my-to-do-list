@@ -42,9 +42,10 @@
   display: flex;
   flex-direction: column; /* 내부 컨텐츠 세로 정렬 */
   align-items: center; /*이걸 해줘야 가로축 가운데 정렬 가능 (flex방향 column이라서*/
-  margin: 0 auto;
+  margin: 0 auto 5rem;
   min-width: 800px;
   max-width: 1200px;
+  min-height: 800px;
   font-family: "Pretendard-Regular"; /*전체태그적용위해 필요*/
 }
 
@@ -59,12 +60,13 @@ header {
   /*적용안돼 따로 부여*/
   display: flex;
   justify-content: space-between; /*자식요소의 양 끝과 부모요소 사이의 공간을 제외한 자식요소 사이의 간격을 일정하게 벌림 */
-  margin-top: 20px;
+  margin-top: 30px;
+  margin-bottom: 10px;
 }
 
 .headerTitle {
   font-family: "Pretendard-Black"; /*두꺼운폰트적용*/
-  font-size: 25px;
+  font-size: 30px;
   font-weight: 900;
   margin-left: 20px;
   margin-top: 5px;
@@ -104,7 +106,27 @@ input {
   margin-top: 15px;
 }
 
-section {
+.order-section {
+  background-color: rgb(249, 221, 198);
+  width: 98%;
+  height: 28px;
+  display: flex;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.orderTitle {
+  margin: 7px 20px auto 10px;
+  font-size: 15px;
+}
+
+select {
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.body-section {
   /*설정안되는이유를 알았다, 카드가 아래로 못가서..*/
   max-height: 1000px;
   margin-top: 30px;
@@ -129,13 +151,14 @@ section {
 .doneTodo-box {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  /*justify..:space-between을 썼더니 모든카드길이가 맞춰짐(긴내용카드따라)*/
+
   margin-top: 20px;
   background-color: rgb(255, 248, 239);
   border: none;
   border-radius: 5px;
   width: 250px;
-  min-height: 170px;
-  /* 내용길어지면 길어지도록하고 최소높이는설정*/
   margin-right: 15px;
 }
 
@@ -170,9 +193,16 @@ section {
 }
 
 .todoContent {
-  margin: 0 20px 20px 20px;
+  margin: 0 20px 10px 20px;
   line-height: 1.5em;
   min-height: 20px;
+}
+
+time {
+  margin: 10px 20px 10px auto;
+  color: rgb(73, 65, 70);
+  width: 90%;
+  text-align: end; /*width %와 같이써야 적용*/
 }
 
 .todo-btns {

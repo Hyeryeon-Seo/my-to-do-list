@@ -1,7 +1,7 @@
 import React from "react";
 
 function CustomInput(props) {
-  const { children, value, onChange, placeholder, name } = props; // 구조분해할당
+  const { children, name, type, value, onChange, placeholder } = props; // 구조분해할당
   return (
     <div className="inputBox">
       <div className="inputText">{children}</div>
@@ -11,7 +11,7 @@ function CustomInput(props) {
           borderWidth: 0, // 테두리 없애기
         }}
         name={name}
-        type="text"
+        type={type}
         value={value}
         onChange={onChange}
         placeholder={placeholder}

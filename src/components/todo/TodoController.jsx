@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Todo from "./TodoList";
+import TodoItem from "./TodoItem";
 import TodoForm from "./TodoForm";
 
 function TodoController() {
@@ -8,6 +8,7 @@ function TodoController() {
       id: 0,
       title: "리액트 강의 2회독하기",
       content: "1월 내로 리액트 강의내용 내 걸로 만들기 !",
+      deadline: "마감일 : 2024-01-31",
       isDone: false,
     },
   ]);
@@ -15,6 +16,8 @@ function TodoController() {
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [deadline, setDeadline] = useState("");
+  const [sortOrder, setSortOrder] = useState(""); //초기설정 빠른순
 
   // input의 value값 가져오기
   // 개선: 이벤트핸들러함수명 컨벤션따라 변경
@@ -25,6 +28,33 @@ function TodoController() {
   // 개선: 이벤트핸들러함수명 컨벤션따라 변경
   const handleContentInputChange = (event) => {
     setContent(event.target.value);
+  };
+
+  // 추가: input type="date" 의 value값 가져오기
+  const handleDeadlineInputChange = (event) => {
+    setDeadline(event.target.value);
+    // if (!event.target.value) // 이경우는 날짜 눌렀다가 삭제시 뜸
+  };
+
+  // 추가: 마감날짜 오름차순 내림차순 정렬 드롭다운 메뉴 _select 설정시
+  const handleSortOrderChange = (event) => {
+    setSortOrder(event.target.value);
+    sortTodoItems(sortOrder); //?
+  };
+
+  // todoItem 정렬하는 함수
+  // 미완성
+  const sortTodoItems = (order) => {
+    const newOrderDeadline = todoList.sort((a, b) => {
+      if (order === "asc") {
+        // 다시 체크
+        return new Date(a.deadline) - new Date(b.deadline);
+      } else {
+        // else안써도?
+        return new Date(b.deadline) - new Date(a.deadline);
+      }
+    });
+    setSortOrder(newOrderDeadline);
   };
 
   // 추가하기 버튼 addTodoHandler
@@ -47,6 +77,18 @@ function TodoController() {
       alert("제목과 내용 모두 입력해주세요");
       // 이 경우 초기화없이 입력내용 유지시킴
       return;
+    } else if (!deadline) {
+      // 추가
+      addTodoHandler({
+        id: crypto.randomUUID(),
+        title,
+        content,
+        deadline,
+        isDone: false,
+      });
+      setTitle("");
+      setContent("");
+      setDeadline("");
     } else {
       // 위의 경우가 아니라면 아래 실행
       // 아래 객체를 추가하기 함수에 넣어주기
@@ -54,10 +96,12 @@ function TodoController() {
         id: crypto.randomUUID(), // id: todoList.length -id 중복 가능성 -> 개선: 고유한id부여- Date.now()도 가능 & crypto.randomUUID() 사용
         title, // input에 입력된 title,body - setTitle,setBody로 title,body 설정됨 (초기값에서)
         content,
+        deadline,
         isDone: false,
       });
       setTitle(""); //초기화 - 개선: else케이스 안에 넣어서 추가(제출)되었을때만 초기화시킴
       setContent("");
+      setDeadline("");
       /* e.target.reset(); // 개선(다른방법): form태그 내 (제출시) input 초기화 _form태그로 가능한 메서드
       근데 여기에 해도 밖에 해도 안 먹힌다, name도 부여해봤고 e.target.title.혹은 .value까지
       해봤지만 실패 => 다시 setTitle 등을 쓰기로 했다
@@ -92,6 +136,9 @@ function TodoController() {
     );
   };
 
+  const workingTodoList = todoList.filter((todo) => todo.isDone === false);
+  const doneTodoList = todoList.filter((todo) => todo.isDone === true);
+
   return (
     <main>
       {/*여기선 일단 form태그자체는 컴포넌트화 X, 그 안의 input만 컴포넌트화했다 */}
@@ -99,8 +146,10 @@ function TodoController() {
         onSubmit={onSubmit}
         valueTitle={title}
         valueContent={content}
+        valueDeadline={deadline}
         onChangeTitle={handleTitleInputChange}
         onChangeContent={handleContentInputChange}
+        onChangeDeadline={handleDeadlineInputChange}
       ></TodoForm>
       {/* props전 
       <form onSubmit={onSubmit}>
@@ -130,53 +179,59 @@ function TodoController() {
         </CustomBtn>
       </form> 
       */}
-      <section>
+      <section className="order-section">
+        <h3 className="orderTitle">마감일 순으로 보기</h3>
+        <select value={sortOrder} onChange={handleSortOrderChange}>
+          {/*드롭다운 목록*/}
+          <option value="asc">빠른 순(오름차순)</option>
+          <option value="desc">느린 순(내림차순)</option>
+        </select>
+      </section>
+      <section className="body-section">
         <div className="workingTodoList">
           <div className="listTitle">Working 🏃‍♀️</div>
-          <div className="list">
-            {todoList
-              .filter((todo) => todo.isDone === false)
-              .map((todo) => {
-                return (
-                  <Todo
-                    /*className="workingTodo-box"*/
-                    type="working" // 개선: className말고 type으로 구분하도록 한다 (Todo컴포넌트에서)
-                    key={todo.id}
-                    todo={todo}
-                    title={todo.title}
-                    content={todo.content}
-                    firstHandler={deleteTodoHandler}
-                    secondHandler={onToggleTodoItem}
-                    firstBtn="삭제"
-                    secondBtn="완료"
-                  />
-                );
-              })}
-          </div>
+          <li className="list">
+            {workingTodoList.map((todo) => {
+              return (
+                <TodoItem
+                  /*className="workingTodo-box"*/
+                  type="working" // 개선: className말고 type으로 구분하도록 한다 (Todo컴포넌트에서)
+                  key={todo.id}
+                  todo={todo}
+                  title={todo.title}
+                  content={todo.content}
+                  deadline={todo.deadline}
+                  firstHandler={deleteTodoHandler}
+                  secondHandler={onToggleTodoItem}
+                  firstBtn="삭제"
+                  secondBtn="완료"
+                />
+              );
+            })}
+          </li>
         </div>
         <div className="doneTodoList">
           <div className="listTitle">Done 🎉</div>
-          <div className="list">
-            {todoList
-              .filter((todo) => todo.isDone === true)
-              .map((todo) => {
-                return (
-                  <Todo
-                    // 문제점: working부분에선 했으나, done부분에서는 todo={todo} 안넘김!
-                    /*className="doneTodo-box"*/
-                    type="done" // 개선
-                    key={todo.id}
-                    todo={todo} // 개선: 추가 - todo넘기기
-                    title={todo.title}
-                    content={todo.content}
-                    firstHandler={deleteTodoHandler}
-                    secondHandler={onToggleTodoItem}
-                    firstBtn="삭제" //이 key를 통해 "삭제" 문자열을 꺼낼수
-                    secondBtn="완료 취소"
-                  />
-                );
-              })}
-          </div>
+          <li className="list">
+            {doneTodoList.map((todo) => {
+              return (
+                <TodoItem
+                  // 문제점: working부분에선 했으나, done부분에서는 todo={todo} 안넘김!
+                  /*className="doneTodo-box"*/
+                  type="done" // 개선
+                  key={todo.id}
+                  todo={todo} // 개선: 추가 - todo넘기기
+                  title={todo.title}
+                  content={todo.content}
+                  deadline={todo.deadline}
+                  firstHandler={deleteTodoHandler}
+                  secondHandler={onToggleTodoItem}
+                  firstBtn="삭제" //이 key를 통해 "삭제" 문자열을 꺼낼수
+                  secondBtn="완료 취소"
+                />
+              );
+            })}
+          </li>
         </div>
       </section>
     </main>

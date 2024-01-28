@@ -90,8 +90,6 @@ function TodoController() {
       setContent("");
       setDeadline("");
     } else {
-      // 위의 경우가 아니라면 아래 실행
-      // 아래 객체를 추가하기 함수에 넣어주기
       addTodoHandler({
         id: crypto.randomUUID(), // id: todoList.length -id 중복 가능성 -> 개선: 고유한id부여- Date.now()도 가능 & crypto.randomUUID() 사용
         title, // input에 입력된 title,body - setTitle,setBody로 title,body 설정됨 (초기값에서)
@@ -111,7 +109,6 @@ function TodoController() {
 
   // 삭제 버튼: filter메서드로 해당id의 카드빼기
   const deleteTodoHandler = (id) => {
-    // const newTodoList = todoList.filter((todo) => todo.id !== id); // filter함수 사용, 받은 id의 todo가 아닌 것만 보여주기
     setTodoList((prevTodoList) =>
       prevTodoList.filter((todo) => todo.id !== id)
     ); // 개선: setTodoList()안 콜백함수 (에러방지)
@@ -120,18 +117,12 @@ function TodoController() {
   // Done 완료&완료취소 버튼 (토글)=> 해당id의 todo 의 key값, isDone의 value값을 false <-> true 로 변경해야
   const onToggleTodoItem = (id) => {
     // 개선: 위와 마찬가지로 set..()안 콜백함수 /
-    // 단순 추가, 혹은 filter로 삭제기능 구현과 달리
-    // 완료,완료취소 기능은 하나의 todo객체 안에서 수정해야 (삭제에서 filter썼듯 여기는 map을 쓰며 돌아야)
-    //setTodoList를 쓴다는건, 다시 새로운 list로 바꿔야하는건데 해당id의객체 isDone만 바꿔서 갈아끼운거 보내줘야
     setTodoList((prevTodos) =>
       prevTodos.map((todo) => {
         if (todo.id === id) {
-          // 해당 객체 속성 바꿔서 리턴
-          return { ...todo, isDone: !todo.isDone }; // todo의 키isDone의 밸류값_반대로 넣어주기
-          // todo.isDone = !todo.isDone; 만 하면 작동안됨! ㅠㅠ 꼭 나머지객체부분도 ...으로 풀고, isDone바꿔야
+          return { ...todo, isDone: !todo.isDone };
         }
         return todo;
-        // 위의 if조건에 해당할때만 isDone바꿔주고 나머지는 그냥 todo그대로 리턴
       })
     );
   };
@@ -141,7 +132,6 @@ function TodoController() {
 
   return (
     <main>
-      {/*여기선 일단 form태그자체는 컴포넌트화 X, 그 안의 input만 컴포넌트화했다 */}
       <TodoForm
         onSubmit={onSubmit}
         valueTitle={title}
@@ -151,34 +141,7 @@ function TodoController() {
         onChangeContent={handleContentInputChange}
         onChangeDeadline={handleDeadlineInputChange}
       ></TodoForm>
-      {/* props전 
-      <form onSubmit={onSubmit}>
-        <div className="inputBox">
-          <div className="inputText">제목</div>
-          <CustomInput
-            value={title}
-            onChange={handleTitleInputChange}
-            placeholder=" title ..."
-            
-          />
-        </div>
-        <div className="inputBox">
-          <div className="inputText">내용</div>
-          <CustomInput
-            value={content}
-            onChange={handleContentInputChange}
-            placeholder=" content ..."
-          />
-        </div>
-        {/* 아래버튼 속성 onClick={addTodoHandler}을 없애고
-        대신 type="submit"을 넣고, 
-        form태그에 연결된 함수 onSubmit안에서 유효성검사와 함께
-        추가기능 처리하도록 함
-        <CustomBtn className="add-btn" type="submit">
-          추가하기
-        </CustomBtn>
-      </form> 
-      */}
+      {/*내림차순 눌렀을때 잘 작동하지만 input선택해도 입력창안바뀜*/}
       <section className="order-section">
         <h3 className="orderTitle">마감일 순으로 보기</h3>
         <select value={sortOrder} onChange={handleSortOrderChange}>
@@ -194,7 +157,6 @@ function TodoController() {
             {workingTodoList.map((todo) => {
               return (
                 <TodoItem
-                  /*className="workingTodo-box"*/
                   type="working" // 개선: className말고 type으로 구분하도록 한다 (Todo컴포넌트에서)
                   key={todo.id}
                   todo={todo}
@@ -217,7 +179,6 @@ function TodoController() {
               return (
                 <TodoItem
                   // 문제점: working부분에선 했으나, done부분에서는 todo={todo} 안넘김!
-                  /*className="doneTodo-box"*/
                   type="done" // 개선
                   key={todo.id}
                   todo={todo} // 개선: 추가 - todo넘기기
@@ -226,7 +187,7 @@ function TodoController() {
                   deadline={todo.deadline}
                   firstHandler={deleteTodoHandler}
                   secondHandler={onToggleTodoItem}
-                  firstBtn="삭제" //이 key를 통해 "삭제" 문자열을 꺼낼수
+                  firstBtn="삭제"
                   secondBtn="완료 취소"
                 />
               );

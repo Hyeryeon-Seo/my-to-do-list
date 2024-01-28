@@ -7,8 +7,8 @@ function CustomInput(props) {
       <div className="inputText">{children}</div>
       <input
         style={{
-          borderRadius: 5, // css 쓰는법 약간 다름 주의
-          borderWidth: 0, // 테두리 없애기
+          borderRadius: 5,
+          borderWidth: 0,
         }}
         name={name}
         type={type}

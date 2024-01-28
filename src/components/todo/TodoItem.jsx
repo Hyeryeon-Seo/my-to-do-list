@@ -1,7 +1,6 @@
 import React from "react";
 import CustomBtn from "./CustomBtn";
-// 여기서 CustomBtn 사용해서..(CustomBtn으로 props 내려주기) import
-//App.jsx 나 TodoController 등 상위 컴포넌트 - import하는게 아니다. 오히려 여기서 export해서 상위컴포넌트에서 import (여기서는 상위컴의 props 내려받아 사용)
+
 function TodoItem(props) {
   const {
     type,
@@ -16,15 +15,15 @@ function TodoItem(props) {
     secondBtn,
   } = props; // 구조분해할당
 
-  let dateDeadline = ""; // 밖에서 선언해줘야. 재할당할거니 let
+  let dateDeadline = "";
   if (!deadline) {
     // 넘겨받은 deadline이 없는 경우
     dateDeadline = "미정";
   } else {
     dateDeadline = new Date(deadline).toLocaleDateString("ko-KR", {
-      year: "2-digit", // year- numeric, 2-digit 만 가능
-      month: "long", // month 속성으로 "long","short"여야 년-월-일 뜸
-      day: "numeric", // day- numeric, 2-digit
+      year: "2-digit",
+      month: "long",
+      day: "numeric",
     });
   }
 

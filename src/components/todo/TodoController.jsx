@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import CustomInput from "./CustomInput";
-import CustomBtn from "./CustomBtn";
-import Todo from "./Todo";
+import Todo from "./TodoList";
+import TodoForm from "./TodoForm";
 
 function TodoController() {
   const [todoList, setTodoList] = useState([
@@ -96,6 +95,14 @@ function TodoController() {
   return (
     <main>
       {/*여기선 일단 form태그자체는 컴포넌트화 X, 그 안의 input만 컴포넌트화했다 */}
+      <TodoForm
+        onSubmit={onSubmit}
+        valueTitle={title}
+        valueContent={content}
+        onChangeTitle={handleTitleInputChange}
+        onChangeContent={handleContentInputChange}
+      ></TodoForm>
+      {/* props전 
       <form onSubmit={onSubmit}>
         <div className="inputBox">
           <div className="inputText">제목</div>
@@ -103,7 +110,7 @@ function TodoController() {
             value={title}
             onChange={handleTitleInputChange}
             placeholder=" title ..."
-            name="title"
+            
           />
         </div>
         <div className="inputBox">
@@ -112,17 +119,17 @@ function TodoController() {
             value={content}
             onChange={handleContentInputChange}
             placeholder=" content ..."
-            name="content"
           />
         </div>
         {/* 아래버튼 속성 onClick={addTodoHandler}을 없애고
         대신 type="submit"을 넣고, 
         form태그에 연결된 함수 onSubmit안에서 유효성검사와 함께
-        추가기능 처리하도록 함*/}
+        추가기능 처리하도록 함
         <CustomBtn className="add-btn" type="submit">
           추가하기
         </CustomBtn>
-      </form>
+      </form> 
+      */}
       <section>
         <div className="workingTodoList">
           <div className="listTitle">Working 🏃‍♀️</div>

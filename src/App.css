@@ -95,7 +95,7 @@ form {
   font-size: medium;
   font-weight: bold;
   margin-right: 15px;
-  margin-top: 20px;
+  margin-top: 25px;
 }
 
 input {
@@ -127,6 +127,8 @@ section {
 
 .workingTodo-box,
 .doneTodo-box {
+  display: flex;
+  flex-direction: column;
   margin-top: 20px;
   background-color: rgb(255, 248, 239);
   border: none;
@@ -144,6 +146,13 @@ section {
   box-shadow: 0px 0px 3px 1px lightcoral;
 }
 
+.todo-main {
+  /*todoTitle과 todoContent 포함하는 div*/
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /*flex적용해야 가능, 내부요소들사이 간격 부여*/
+}
+
 .doneTodoList {
   margin-top: 50px;
 }
@@ -156,14 +165,20 @@ section {
 .todoTitle {
   font-size: large;
   font-weight: bold;
-  margin: 20px;
+  margin: 20px auto 0 20px;
   line-height: 1.5em;
 }
 
 .todoContent {
-  margin: 20px;
+  margin: 0 20px 20px 20px;
   line-height: 1.5em;
   min-height: 20px;
+}
+
+.todo-btns {
+  /*삭제,완료(취소)버튼 포함하는 div*/
+  display: flex;
+  justify-content: space-between; /*버튼양끝위치*/
 }
 
 .add-btn,

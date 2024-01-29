@@ -43,8 +43,9 @@ function TodoController() {
   };
 
   // todoItem 정렬하는 함수
-  // 미완성 -> v / 작동하지만 처음에 '빠른순'을 먼저 택하면 안먹힘 (느린순했다가 눌러야)
+  // 미완성 -> ? / 작동하지만 처음에 '빠른순'을 먼저 택하면 안먹힘 (느린순했다가 눌러야)
   // 그런데 오름차순 asc가 마감일 느린순?
+  // 마감일 입력x로 미정시, 그 카드들은 순서정렬자체가 안되는 문제 (그대로있음)
   const sortTodoItems = (order) => {
     const newOrderDeadline = [...todoList].sort((a, b) => {
       if (sortOrder === "asc") {

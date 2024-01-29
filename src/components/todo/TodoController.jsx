@@ -17,7 +17,7 @@ function TodoController() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [deadline, setDeadline] = useState("");
-  const [sortOrder, setSortOrder] = useState(""); //초기설정 빠른순
+  const [sortOrder, setSortOrder] = useState("desc"); //초기설정 빠른순? 설정안됨
 
   // input의 value값 가져오기
   // 개선: 이벤트핸들러함수명 컨벤션따라 변경
@@ -43,10 +43,11 @@ function TodoController() {
   };
 
   // todoItem 정렬하는 함수
-  // 미완성
+  // 미완성 -> v / 작동하지만 처음에 '빠른순'을 먼저 택하면 안먹힘 (느린순했다가 눌러야)
+  // 그런데 오름차순 asc가 마감일 느린순?
   const sortTodoItems = (order) => {
-    const newOrderDeadline = todoList.sort((a, b) => {
-      if (order === "asc") {
+    const newOrderDeadline = [...todoList].sort((a, b) => {
+      if (sortOrder === "asc") {
         // 다시 체크
         return new Date(a.deadline) - new Date(b.deadline);
       } else {
@@ -54,7 +55,8 @@ function TodoController() {
         return new Date(b.deadline) - new Date(a.deadline);
       }
     });
-    setSortOrder(newOrderDeadline);
+    // setSortOrder(newOrderDeadline); 작동하는데 셀렉트박스 눌린게 고정안됨
+    setTodoList(newOrderDeadline); // 정렬된 todoitem으로 todolist 상태 업데이트
   };
 
   // 추가하기 버튼 addTodoHandler
@@ -146,8 +148,8 @@ function TodoController() {
         <h3 className="orderTitle">마감일 순으로 보기</h3>
         <select value={sortOrder} onChange={handleSortOrderChange}>
           {/*드롭다운 목록*/}
-          <option value="asc">빠른 순(오름차순)</option>
-          <option value="desc">느린 순(내림차순)</option>
+          <option value="desc">빠른 순</option>
+          <option value="asc">느린 순</option>
         </select>
       </section>
       <section className="body-section">

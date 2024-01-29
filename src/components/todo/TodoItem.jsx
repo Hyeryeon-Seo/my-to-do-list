@@ -59,7 +59,7 @@ function TodoItem(props) {
         <div className="todo-main">
           <h2 className="todoTitle">{title}</h2>
           <p className="todoContent">{content}</p>
-          <time className="todoDeadline">{dateDeadline}</time>
+          <time className="todoDeadline">{deadlineText}</time>
         </div>
         <div className="todo-btns">
           <CustomBtn className="del-btn" onClick={() => firstHandler(todo.id)}>

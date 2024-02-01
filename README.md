@@ -70,8 +70,8 @@
 
 ## 📌시연 화면
 
-- 23.02.01 디자인 조금 수정<br/><br/>
-  <img src="/assets/mainScreenshot_0201.png" width="600"><br/><br/>
+- 23.02.01 디자인 추가 수정<br/><br/>
+  <img src="/assets/mainScreenshot_0201.png" width="800"><br/><br/>
 
 - todo 카드 추가하기 <br/><br/>
   <img src="/assets/GIF_add,submit.gif" width="800"> <br/><br/>

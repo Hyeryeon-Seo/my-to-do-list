@@ -38,17 +38,18 @@
   그런경우 이 * 별 전체태그 따로 부여도 필요 */
 }
 
+/*
 .app-container {
   display: flex;
-  flex-direction: column; /* 내부 컨텐츠 세로 정렬 */
-  align-items: center; /*이걸 해줘야 가로축 가운데 정렬 가능 (flex방향 column이라서*/
+  flex-direction: column; /* 내부 컨텐츠 세로 정렬 
+  align-items: center; /*이걸 해줘야 가로축 가운데 정렬 가능 (flex방향 column이라서/
   margin: 0 auto 0;
   min-width: 800px;
   max-width: 1200px;
   min-height: 1000px;
-  font-family: "Pretendard-Regular"; /*전체태그적용위해 필요*/
+  font-family: "Pretendard-Regular"; /*전체태그적용위해 필요*
   background-color: rgb(255, 251, 226);
-}
+} */
 
 main {
   margin: 10px;
@@ -56,23 +57,25 @@ main {
   /*min,max말고 이렇게 딱 정해줘야 가운데에 온다 ..*/
 }
 
+/*
 header {
   width: 1110px;
-  /*적용안돼 따로 부여*/
+  /*적용안돼 따로 부여*
   display: flex;
-  justify-content: space-between; /*자식요소의 양 끝과 부모요소 사이의 공간을 제외한 자식요소 사이의 간격을 일정하게 벌림 */
+  justify-content: space-between; /*자식요소의 양 끝과 부모요소 사이의 공간을 제외한 자식요소 사이의 간격을 일정하게 벌림 *
   margin-top: 30px;
   margin-bottom: 10px;
-}
+} */
 
+/*
 .headerTitle {
-  font-family: "Pretendard-Black"; /*두꺼운폰트적용*/
+  font-family: "Pretendard-Black"; /*두꺼운폰트적용*
   font-size: 30px;
   font-weight: 900;
   margin-left: 20px;
   margin-top: 5px;
   margin-bottom: 10px;
-}
+} */
 .headerName {
   font-family: "Pretendard-Light";
   font-size: 12px;

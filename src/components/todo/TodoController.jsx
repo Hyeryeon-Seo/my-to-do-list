@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import TodoItem from "./TodoItem";
 import TodoForm from "./TodoForm";
 import CustomOrderSelect from "../common/CustomOrderSelect";
+import TodoList from "./TodoList";
 
 function TodoController() {
 	const [todoList, setTodoList] = useState([
@@ -49,7 +49,7 @@ function TodoController() {
 	// 미완성 -> ? / 작동하지만 처음에 '빠른순'을 먼저 택하면 안먹힘 (느린순했다가 눌러야)
 	// 그런데 오름차순 asc가 마감일 느린순?
 	// 마감일 입력x로 미정시, 그 카드들은 순서정렬자체가 안되는 문제 (그대로있음)
-	const sortTodoItems = (order) => {
+	const sortTodoItems = () => {
 		const newOrderDeadline = [...todoList].sort((a, b) => {
 			if (sortOrder === "asc") {
 				// 다시 체크
@@ -159,7 +159,23 @@ function TodoController() {
 				마감일 순으로 보기
 			</CustomOrderSelect>
 			<section className="body-section">
-				<div className="workingTodoList">
+				<TodoList
+					type="working"
+					todoList={workingTodoList}
+					deleteTodoHandler={deleteTodoHandler}
+					onToggleTodoItem={onToggleTodoItem}
+				>
+					Working 🏃‍♀️
+				</TodoList>
+				<TodoList
+					type="done"
+					todoList={doneTodoList}
+					deleteTodoHandler={deleteTodoHandler}
+					onToggleTodoItem={onToggleTodoItem}
+				>
+					Done 🎉
+				</TodoList>
+				{/* <div className="workingTodoList">
 					<div className="listTitle">Working 🏃‍♀️</div>
 					<hr />
 					<li className="list">
@@ -203,7 +219,7 @@ function TodoController() {
 							);
 						})}
 					</li>
-				</div>
+				</div> */}
 			</section>
 		</main>
 	);

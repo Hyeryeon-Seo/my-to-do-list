@@ -52,9 +52,9 @@ function TodoController() {
 	};
 
 	// todoItem 정렬하는 함수
-	// 미완성 -> ? / 작동하지만 처음에 '빠른순'을 먼저 택하면 안먹힘 (느린순했다가 눌러야)
+	// 작동하지만 처음에 '빠른순'을 먼저 택하면 안먹힘 (느린순했다가 눌러야)
 	// 그런데 오름차순 asc가 마감일 느린순?
-	// 마감일 입력x로 미정시, 그 카드들은 순서정렬자체가 안되는 문제 (그대로있음)
+	// 마감일 입력x로 미정시, 그 카드들은 순서정렬자체가 안되는 문제 (그대로있음) -> 미정 시에도 9999-.. 날짜부여해서 해결
 	const sortTodoItems = () => {
 		const newOrderDeadline = [...todoList].sort((a, b) => {
 			if (sortOrder === "asc") {
@@ -64,7 +64,6 @@ function TodoController() {
 				return new Date(b.deadline) - new Date(a.deadline);
 			}
 		});
-		// setSortOrder(newOrderDeadline); 작동하는데 셀렉트박스 눌린게 고정안됨
 		setTodoList(newOrderDeadline); // 정렬된 todoitem으로 todolist 상태 업데이트
 	};
 
@@ -134,7 +133,8 @@ function TodoController() {
 		setTodoList((prevTodos) =>
 			prevTodos.map((todo) => {
 				if (todo.id === id) {
-					// console.log(todo.deadline); //해봤더니 마감일미정시 9999-12-31 아니고 9956으로뜸..
+					// console.log(todo.deadline);
+					//해봤더니 마감일미정시 9999-12-31 아니고 9956으로뜸.. ? (어쨋든 마감일미정 카드끼리 붙여놓기는 해결)
 					return { ...todo, isDone: !todo.isDone };
 				}
 				return todo;
@@ -156,7 +156,6 @@ function TodoController() {
 				onChangeContent={handleContentInputChange}
 				onChangeDeadline={handleDeadlineInputChange}
 			/>
-			{/*내림차순 눌렀을때 잘 작동하지만 input선택해도 입력창안바뀜*/}
 			{/* 순서정렬 select태그 섹션 */}
 			<CustomOrderSelect
 				selectValue={sortOrder}
@@ -181,51 +180,6 @@ function TodoController() {
 				>
 					Done 🎉
 				</TodoList>
-				{/* <div className="workingTodoList">
-					<div className="listTitle">Working 🏃‍♀️</div>
-					<hr />
-					<li className="list">
-						{workingTodoList.map((todo) => {
-							return (
-								<TodoItem
-									type="working" // 개선: className말고 type으로 구분하도록 한다 (Todo컴포넌트에서)
-									key={todo.id}
-									todo={todo}
-									title={todo.title}
-									content={todo.content}
-									deadline={todo.deadline}
-									firstHandler={deleteTodoHandler}
-									secondHandler={onToggleTodoItem}
-									firstBtn="삭제"
-									secondBtn="완료"
-								/>
-							);
-						})}
-					</li>
-				</div>
-				<div className="doneTodoList">
-					<div className="listTitle">Done 🎉</div>
-					<hr />
-					<li className="list">
-						{doneTodoList.map((todo) => {
-							return (
-								<TodoItem
-									// 문제점: working부분에선 했으나, done부분에서는 todo={todo} 안넘김!
-									type="done" // 개선
-									key={todo.id}
-									todo={todo} // 개선: 추가 - todo넘기기
-									title={todo.title}
-									content={todo.content}
-									deadline={todo.deadline}
-									firstHandler={deleteTodoHandler}
-									secondHandler={onToggleTodoItem}
-									firstBtn="삭제"
-									secondBtn="완료 취소"
-								/>
-							);
-						})}
-					</li>
-				</div> */}
 			</ListsSection>
 		</main>
 	);

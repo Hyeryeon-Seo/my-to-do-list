@@ -13,15 +13,11 @@ const InputText = styled.div`
 `;
 
 function CustomInput(props) {
-	const { children, name, type, value, onChange, placeholder } = props; // 구조분해할당
+	const { children, name, type, value, onChange, placeholder } = props;
 	return (
 		<InputBox>
 			<InputText>{children}</InputText>
 			<input
-				// style={{
-				// 	borderRadius: 5,
-				// 	borderWidth: 0,
-				// 인라인스타일링 -> styled-component 전역스타일링}}
 				name={name}
 				type={type}
 				value={value}

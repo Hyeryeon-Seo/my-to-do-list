@@ -22,10 +22,8 @@ const TodoTextBox = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
-	word-wrap: break-word; // 영어,단어기준- 이걸해야만 영어글자 삐져나옴에 적용돼 해결!  */
-	/* word-break: normal; 적용안됨 */
-	/* word-break: keep-all; 적용안됨 */
-	// word-break: break-all; /*영,한둘다, 글자기준구분? 얘도 (글자단위) 적용됐다*/
+	word-wrap: break-word;
+	/*영어만 제목에서 줄바꿈안되는 현상 발견 > 영어,단어기준- 이걸해야만 영어글자 삐져나옴에 적용돼 해결! */
 `;
 
 const TodoTitle = styled.h2`
@@ -33,8 +31,7 @@ const TodoTitle = styled.h2`
 	font-weight: bold;
 	margin: 20px 15px 0 15px;
 	line-height: 1.5em;
-	/* word-break: normal; 적용안됨 */
-`; // 영어만 제목에서 줄바꿈안되는 현상 발견 ㅠㅠ
+`;
 
 const TodoContent = styled.p`
 	margin: 0 20px 10px 20px;
@@ -54,9 +51,6 @@ const TodoBtnBox = styled.div`
 	display: flex;
 	justify-content: space-between;
 `;
-
-//CustomBtn, 스타일컴포 명과 jsx 컴포 명 겹치면 안됨!
-//styled.뒤에 html태그쓴거처럼 그대로, props주는 jsx컴포넌트명(CustomBtn- 삭제함) 쓰면 NO!!!
 
 const BtnDelDone = styled.button`
 	background-color: rgb(250, 243, 231);

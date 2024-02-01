@@ -50,7 +50,6 @@ function TodoForm({
 			>
 				마감일
 			</CustomInput>
-			{/*추가하기 버튼은 form태그 안에 있어 onClick속성 props 내려주지않았음*/}
 			<AddBtn type="submit">추가하기</AddBtn>
 		</form>
 	);

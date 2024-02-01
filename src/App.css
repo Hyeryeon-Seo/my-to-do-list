@@ -1,0 +1,258 @@
+/* reset.css 먼저 적용 */
+@font-face {
+  font-family: "Pretendard-Light";
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Light.woff")
+    format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Pretendard-Bold";
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff")
+    format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Pretendard-Black";
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Black.woff")
+    format("woff");
+  font-weight: 900;
+  font-style: normal;
+}
+
+* {
+  font-family: "Pretendard-Regular";
+  /*이렇게만하면 부여안되는 태그 발생 
+  아래에 .app-conatiner 최상위태그에 부여, 거의 적용되나 form태그 등만 안됨
+  그런경우 이 * 별 전체태그 따로 부여도 필요 */
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column; /* 내부 컨텐츠 세로 정렬 */
+  align-items: center; /*이걸 해줘야 가로축 가운데 정렬 가능 (flex방향 column이라서*/
+  margin: 0 auto 0;
+  min-width: 800px;
+  max-width: 1200px;
+  min-height: 1000px;
+  font-family: "Pretendard-Regular"; /*전체태그적용위해 필요*/
+  background-color: rgb(255, 251, 226);
+}
+
+main {
+  margin: 10px;
+  width: 1110px;
+  /*min,max말고 이렇게 딱 정해줘야 가운데에 온다 ..*/
+}
+
+header {
+  width: 1110px;
+  /*적용안돼 따로 부여*/
+  display: flex;
+  justify-content: space-between; /*자식요소의 양 끝과 부모요소 사이의 공간을 제외한 자식요소 사이의 간격을 일정하게 벌림 */
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.headerTitle {
+  font-family: "Pretendard-Black"; /*두꺼운폰트적용*/
+  font-size: 30px;
+  font-weight: 900;
+  margin-left: 20px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+.headerName {
+  font-family: "Pretendard-Light";
+  font-size: 12px;
+  margin-top: 20px;
+  color: slategray;
+}
+
+form {
+  width: 100%;
+  background-color: rgb(245, 203, 169);
+  height: 70px;
+  display: flex;
+  justify-content: space-around; /*자식요소 기준 주위 공간을 일정 간격으로 벌림*/
+  padding: 10px;
+  border-radius: 15px;
+}
+
+.inputBox {
+  display: flex;
+}
+
+.inputText {
+  font-size: medium;
+  font-weight: bold;
+  margin-right: 15px;
+  margin-top: 25px;
+}
+
+input {
+  height: 30px;
+  font-size: 15px;
+  margin-top: 15px;
+}
+
+.order-section {
+  background-color: rgb(249, 221, 198);
+  width: 98%;
+  height: 28px;
+  display: flex;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.orderTitle {
+  margin: 7px 20px auto 10px;
+  font-size: 15px;
+}
+
+select {
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.body-section {
+  /*설정안되는이유를 알았다, 카드가 아래로 못가서..*/
+  max-height: 1000px;
+  margin-top: 30px;
+}
+
+/* .workingTodoList {
+  display: flex;
+  justify-content: center;
+} */
+
+hr {
+  height: 1px;
+  background: rgb(229, 178, 253);
+  border: 0;
+}
+
+.list {
+  display: flex;
+  margin-top: 10px;
+  margin-left: 20px;
+  /* 최대 최소넓이는 리스트 뜨는 부분에만 적용*/
+  min-width: 800px;
+  max-width: 1200px;
+  min-height: 250px; /*이래야 카드없어도 어느정도 리스트높이유지*/
+  flex-wrap: wrap; /*필수! 카드리스트 다음 줄 이동하게 해줌*/
+}
+
+.workingTodo-box,
+.doneTodo-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /*justify..:space-between을 썼더니 모든카드길이가 맞춰짐(긴내용카드따라)*/
+
+  margin-top: 20px;
+  background-color: rgb(255, 233, 205);
+  border: none;
+  border-radius: 5px;
+  width: 255px;
+  margin-right: 15px;
+}
+
+/*추가: hover기능 카드와 추가버튼 그림자 주기 */
+.workingTodo-box:hover,
+.doneTodo-box:hover,
+.add-btn:hover {
+  box-shadow: 0px 0px 3px 1px lightcoral;
+}
+
+.todo-main {
+  /*todoTitle과 todoContent 포함하는 div*/
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /*flex적용해야 가능, 내부요소들사이 간격 부여*/
+}
+
+.doneTodoList {
+  margin-top: 50px;
+}
+
+.listTitle {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.todoTitle {
+  font-size: 25px;
+  font-weight: bold;
+  margin: 20px 15px 0 15px;
+  line-height: 1.5em;
+}
+
+.todoContent {
+  margin: 0 20px 10px 20px;
+  line-height: 1.5em;
+  min-height: 20px;
+}
+
+.todoDeadline {
+  margin: 20px 20px 10px auto;
+  color: rgb(73, 65, 70);
+  width: 90%;
+  text-align: end; /*width %와 같이써야 적용*/
+  font-size: 15px;
+}
+
+.todo-btns {
+  /*삭제,완료(취소)버튼 포함하는 div*/
+  display: flex;
+  justify-content: space-between; /*버튼양끝위치*/
+}
+
+.add-btn,
+.del-btn,
+.done-btn,
+.working-btn {
+  font-size: medium;
+  background-color: lightyellow;
+  border: 2px solid rgb(223, 173, 168);
+  border-radius: 10px;
+}
+
+.add-btn {
+  background-color: lightyellow;
+  border: none;
+  width: 150px;
+  height: 40px;
+  margin-top: 10px;
+}
+
+.del-btn,
+.done-btn,
+.working-btn {
+  margin: 10px;
+  width: 100px;
+  height: 30px;
+}
+
+.del-btn:hover {
+  background-color: rgb(250, 95, 67);
+  color: white;
+}
+
+.done-btn:hover,
+.working-btn:hover {
+  background-color: rgb(104, 104, 250);
+  color: white;
+}

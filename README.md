@@ -30,8 +30,13 @@
 
   <br>
 
-- 마감날짜 기준으로 오름차/내림차순 정렬 (가능하나 약간의 문제 - 처음에 '빠른 순' 먼저 택하면 적용 안됨 / 마감일 미정시 아예 몰아서 정렬시켜야 하는데, 아직까진 마감일 미정시 해당카드 그대로)
-  => 마감일 미정인 카드끼리 모아 정렬되게 함 (마감일 순 정렬 선택 시 카드가 안움직여서 중간에 섞이는 일 X)
+- 마감날짜 기준으로 오름차/내림차순 정렬
+
+  - (가능하나 약간의 문제 - 처음에 '빠른 순' 먼저 택하면 적용 안됨)
+  - 마감일 미정시 아예 몰아서 정렬시켜야 하는데, 아직까진 마감일 미정시 해당카드 그대로</br>
+    => 2.1 마감일 미정인 카드끼리 모아 정렬되게 함 (마감일 순 정렬 선택 시 카드가 안움직여서 중간에 섞이는 일 X)
+
+- CSS 및 인라인 스타일링 => 모두 styled components 스타일링으로 변경 (추가과제)
 
 <br>
 
@@ -45,11 +50,11 @@
 - TodoForm.jsx 추가
 
 </br>
-* 이후 수정</br>
-  - TodoList.jsx 추가
+* 이후 수정</br></br>
+  - TodoList.jsx 추가</br>
   - CustomOrderSelect.jsx 추가</br></br>
   - 폴더구조 변경: 
-  src폴더 > components > common, layout todo </br>
+  src폴더 > components > common, layout, todo </br>
 
 (자세한 사항은 아래 사진 참고 !)</br></br>
 <img src="/assets/foldersScreenshot_0201.png" width="300"></br></br>
@@ -66,7 +71,7 @@
 ## 📌시연 화면
 
 - 23.02.01 디자인 조금 수정<br/><br/>
-  <img src="/assets/mainScreenshot_0201.png" width="400"><br/><br/>
+  <img src="/assets/mainScreenshot_0201.png" width="600"><br/><br/>
 
 - todo 카드 추가하기 <br/><br/>
   <img src="/assets/GIF_add,submit.gif" width="800"> <br/><br/>

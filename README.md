@@ -81,7 +81,7 @@
 - todo 카드 삭제하기 <br/><br/>
   <img src="/assets/GIF_delete.gif"  width="800"> <br/><br/>
 
-- todo 카드 완료<->완료취소 이동 x <br/><br/>
+- todo 카드 완료<->완료취소 이동 <br/><br/>
   <img src="/assets/GIF_isdone.gif"  width="800"> <br/><br/>
 - todo 마감일 선택 x 시 '마감일 미정'으로 뜨게 함 <br/><br/>
   <img src="/assets/GIF_unselectedDeadline.gif" width="800"> <br/><br/>

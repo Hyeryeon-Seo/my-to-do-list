@@ -1,5 +1,75 @@
 import React from "react";
-import CustomBtn from "../common/CustomBtn";
+import styled from "styled-components";
+
+const TodoBox = styled.ul`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	margin-top: 20px;
+	background-color: rgb(255, 233, 205);
+	border: none;
+	border-radius: 5px;
+	width: 255px;
+	margin-right: 15px;
+	&:hover {
+		box-shadow: 0px 0px 3px 1px lightcoral;
+	}
+`;
+
+const TodoTextBox = styled.div`
+	text-decoration: ${(props) =>
+		props.type === "working" ? "none" : "line-through gray"};
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	word-wrap: break-word; // 영어,단어기준- 이걸해야만 영어글자 삐져나옴에 적용돼 해결!  */
+	/* word-break: normal; 적용안됨 */
+	/* word-break: keep-all; 적용안됨 */
+	// word-break: break-all; /*영,한둘다, 글자기준구분? 얘도 (글자단위) 적용됐다*/
+`;
+
+const TodoTitle = styled.h2`
+	font-size: 25px;
+	font-weight: bold;
+	margin: 20px 15px 0 15px;
+	line-height: 1.5em;
+	/* word-break: normal; 적용안됨 */
+`; // 영어만 제목에서 줄바꿈안되는 현상 발견 ㅠㅠ
+
+const TodoContent = styled.p`
+	margin: 0 20px 10px 20px;
+	line-height: 1.5em;
+	min-height: 20px;
+`;
+
+const TodoDeadline = styled.time`
+	margin: 20px 20px 10px auto;
+	color: rgb(73, 65, 70);
+	width: 90%;
+	text-align: end; /*width %와 같이써야 적용*/
+	font-size: 15px;
+`;
+
+const TodoBtnBox = styled.div`
+	display: flex;
+	justify-content: space-between;
+`;
+
+//CustomBtn, 스타일컴포 명과 jsx 컴포 명 겹치면 안됨!
+//styled.뒤에 html태그쓴거처럼 그대로, props주는 jsx컴포넌트명(CustomBtn- 삭제함) 쓰면 NO!!!
+
+const BtnDelDone = styled.button`
+	background-color: rgb(250, 243, 231);
+	width: 100px;
+	height: 30px;
+	border: 2px solid rgb(223, 173, 168);
+	margin: 10px 10px 20px 10px;
+	&:hover {
+		color: white;
+		background-color: ${(props) =>
+			props.type === "delete" ? "rgb(250, 95, 67)" : "rgb(104, 104, 250)"};
+	}
+`;
 
 function TodoItem(props) {
 	const {
@@ -9,10 +79,8 @@ function TodoItem(props) {
 		title,
 		content,
 		deadline,
-		firstHandler,
-		secondHandler,
-		firstBtn,
-		secondBtn,
+		deleteTodoHandler,
+		onToggleTodoItem,
 	} = props; // 구조분해할당
 
 	let dateDeadline = "";
@@ -29,52 +97,23 @@ function TodoItem(props) {
 		deadlineText = dateDeadline + "까지";
 	}
 
-	if (type === "working") {
-		// === 주의
-		return (
-			// Working 리스트 아이템
-			<ul key={key} className="workingTodo-box">
-				<div className="todo-main">
-					<h2 className="todoTitle">{title}</h2>
-					<p className="todoContent">{content}</p>
-					<time className="todoDeadline">{deadlineText}</time>
-				</div>
-				<div className="todo-btns">
-					<CustomBtn className="del-btn" onClick={() => firstHandler(todo.id)}>
-						{firstBtn}
-					</CustomBtn>
-					<CustomBtn
-						className="done-btn"
-						onClick={() => secondHandler(todo.id)}
-					>
-						{secondBtn}
-					</CustomBtn>
-				</div>
-			</ul>
-		);
-	} else {
-		return (
-			// Done 리스트 아이템
-			<ul key={key} className="doneTodo-box">
-				<div className="todo-main">
-					<h2 className="todoTitle">{title}</h2>
-					<p className="todoContent">{content}</p>
-					<time className="todoDeadline">{deadlineText}</time>
-				</div>
-				<div className="todo-btns">
-					<CustomBtn className="del-btn" onClick={() => firstHandler(todo.id)}>
-						{firstBtn}
-					</CustomBtn>
-					<CustomBtn
-						className="working-btn"
-						onClick={() => secondHandler(todo.id)}
-					>
-						{secondBtn}
-					</CustomBtn>
-				</div>
-			</ul>
-		);
-	}
+	return (
+		<TodoBox key={key}>
+			<TodoTextBox type={type}>
+				<TodoTitle>{title}</TodoTitle>
+				<TodoContent>{content}</TodoContent>
+				<TodoDeadline>{deadlineText}</TodoDeadline>
+			</TodoTextBox>
+			<TodoBtnBox>
+				<BtnDelDone onClick={() => deleteTodoHandler(todo.id)} type="delete">
+					삭제
+				</BtnDelDone>
+				<BtnDelDone onClick={() => onToggleTodoItem(todo.id)} type="isDone">
+					{type === "working" ? "완료" : "완료 취소"}
+				</BtnDelDone>
+			</TodoBtnBox>
+		</TodoBox>
+	);
 }
 
 export default TodoItem;

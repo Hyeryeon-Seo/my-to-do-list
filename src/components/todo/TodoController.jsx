@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import TodoForm from "./TodoForm";
 import CustomOrderSelect from "../common/CustomOrderSelect";
 import TodoList from "./TodoList";
+import styled from "styled-components";
+
+const ListsSection = styled.section`
+	max-height: 1000px;
+	margin-top: 30px;
+`;
 
 function TodoController() {
 	const [todoList, setTodoList] = useState([
@@ -158,7 +164,7 @@ function TodoController() {
 			>
 				마감일 순으로 보기
 			</CustomOrderSelect>
-			<section className="body-section">
+			<ListsSection>
 				<TodoList
 					type="working"
 					todoList={workingTodoList}
@@ -220,7 +226,7 @@ function TodoController() {
 						})}
 					</li>
 				</div> */}
-			</section>
+			</ListsSection>
 		</main>
 	);
 }

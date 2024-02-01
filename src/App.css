@@ -1,42 +1,11 @@
 /* reset.css 먼저 적용 */
-@font-face {
-	font-family: "Pretendard-Light";
-	src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Light.woff")
-		format("woff");
-	font-weight: 300;
-	font-style: normal;
-}
 
-@font-face {
-	font-family: "Pretendard-Regular";
-	src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
-		format("woff");
-	font-weight: 400;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: "Pretendard-Bold";
-	src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff")
-		format("woff");
-	font-weight: 700;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: "Pretendard-Black";
-	src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Black.woff")
-		format("woff");
-	font-weight: 900;
-	font-style: normal;
-}
-
-* {
+/* * {
 	font-family: "Pretendard-Regular";
 	/*이렇게만하면 부여안되는 태그 발생 
   아래에 .app-conatiner 최상위태그에 부여, 거의 적용되나 form태그 등만 안됨
-  그런경우 이 * 별 전체태그 따로 부여도 필요 */
-}
+  그런경우 이 * 별 전체태그 따로 부여도 필요 
+} */
 
 /*
 .app-container {
@@ -83,7 +52,7 @@ header {
   color: slategray;
 }  */
 
-.inputBox {
+/* .inputBox {
 	display: flex;
 }
 
@@ -92,13 +61,7 @@ header {
 	font-weight: bold;
 	margin-right: 15px;
 	margin-top: 25px;
-}
-
-input {
-	height: 30px;
-	font-size: 15px;
-	margin-top: 15px;
-}
+} */
 
 /* .order-section {
   background-color: rgb(249, 221, 198);
@@ -119,34 +82,34 @@ input {
   border-radius: 10px;
 } */
 
-.body-section {
-	/*설정안되는이유를 알았다, 카드가 아래로 못가서..*/
+/* .body-section {
+	/*설정안되는이유를 알았다, 카드가 아래로 못가서..*
 	max-height: 1000px;
 	margin-top: 30px;
-}
+} */
 
 /* .workingTodoList {
   display: flex;
   justify-content: center;
 } */
 
-.list {
+/* .list {
 	display: flex;
 	margin-top: 10px;
 	margin-left: 20px;
-	/* 최대 최소넓이는 리스트 뜨는 부분에만 적용*/
+	/* 최대 최소넓이는 리스트 뜨는 부분에만 적용*
 	min-width: 800px;
 	max-width: 1200px;
-	min-height: 250px; /*이래야 카드없어도 어느정도 리스트높이유지*/
-	flex-wrap: wrap; /*필수! 카드리스트 다음 줄 이동하게 해줌*/
-}
+	min-height: 250px; /*이래야 카드없어도 어느정도 리스트높이유지
+	flex-wrap: wrap; /*필수! 카드리스트 다음 줄 이동하게 해줌
+} */
 
-.workingTodo-box,
+/* .workingTodo-box,
 .doneTodo-box {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	/*justify..:space-between을 썼더니 모든카드길이가 맞춰짐(긴내용카드따라)*/
+	/*justify..:space-between을 썼더니 모든카드길이가 맞춰짐(긴내용카드따라)*
 
 	margin-top: 20px;
 	background-color: rgb(255, 233, 205);
@@ -154,32 +117,32 @@ input {
 	border-radius: 5px;
 	width: 255px;
 	margin-right: 15px;
-}
+} */
 
 /*추가: hover기능 카드와 추가버튼 그림자 주기 */
-.workingTodo-box:hover,
+/* .workingTodo-box:hover,
 .doneTodo-box:hover,
 .add-btn:hover {
-	box-shadow: 0px 0px 3px 1px lightcoral;
-}
+	box-shadow: 0px 0px 3px 1px lightcoral;  !!!
+} */
 
-.todo-main {
-	/*todoTitle과 todoContent 포함하는 div*/
+/* .todo-main {
+	/*todoTitle과 todoContent 포함하는 div*
 	display: flex;
 	flex-direction: column;
-	gap: 0.5rem; /*flex적용해야 가능, 내부요소들사이 간격 부여*/
-}
+	gap: 0.5rem; /*flexf적용해야 가능, 내부요소들사이 간격 부여*
+} */
 
-.doneTodoList {
+/* .doneTodoList {
 	margin-top: 50px;
-}
-
+} */
+/* 
 .listTitle {
 	font-size: x-large;
 	font-weight: bold;
-}
+} */
 
-.todoTitle {
+/* .todoTitle {
 	font-size: 25px;
 	font-weight: bold;
 	margin: 20px 15px 0 15px;
@@ -196,45 +159,45 @@ input {
 	margin: 20px 20px 10px auto;
 	color: rgb(73, 65, 70);
 	width: 90%;
-	text-align: end; /*width %와 같이써야 적용*/
+	text-align: end; /*width %와 같이써야 적용*
 	font-size: 15px;
-}
+} */
 
-.todo-btns {
-	/*삭제,완료(취소)버튼 포함하는 div*/
+/* .todo-btns {
+	/*삭제,완료(취소)버튼 포함하는 div*
 	display: flex;
-	justify-content: space-between; /*버튼양끝위치*/
-}
+	justify-content: space-between; /*버튼양끝위치*
+} */
 
-.del-btn,
+/* .del-btn,
 .done-btn,
 .working-btn {
 	background-color: rgb(250, 243, 231);
 	width: 100px;
 	height: 30px;
-	font-size: medium;
+	/* font-size: medium; *
 	border: 2px solid rgb(223, 173, 168);
-	border-radius: 10px;
-	margin: 10px;
-}
+	/* border-radius: 10px; *
+	margin: 10px 10px 20px 10px;
+} */
 
-.add-btn {
+/* .add-btn {
 	background-color: rgb(253, 232, 250);
 	width: 150px;
 	height: 40px;
-	font-size: medium;
+	/* font-size: medium; *
 	border: none;
-	border-radius: 10px;
+	/* border-radius: 10px; *
 	margin-top: 10px;
-}
+} */
 
-.del-btn:hover {
+/* .del-btn:hover {
 	background-color: rgb(250, 95, 67);
 	color: white;
-}
+} */
 
-.done-btn:hover,
+/* .done-btn:hover,
 .working-btn:hover {
 	background-color: rgb(104, 104, 250);
 	color: white;
-}
+} */

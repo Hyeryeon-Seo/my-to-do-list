@@ -1,6 +1,6 @@
 import React from "react";
-import CustomInput from "./CustomInput";
-import CustomBtn from "./CustomBtn";
+import CustomInput from "../common/CustomInput";
+import CustomBtn from "../common/CustomBtn";
 
 function TodoForm({
   onSubmit,

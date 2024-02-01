@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-// import GlobalStyle from "../../styles/GlobalStyle";
+// import GlobalStyle from "../../styles/GlobalStyle"; - 어쩌피 App.jsx로 이 컴포넌트
+// import할거라서, 거기서 전역스타일링 쓰면 다 적용되니 여기서 적용할 필요 X
 
 const HeaderTitle = styled.h1`
   font-family: "Pretendard-Black"; /*두꺼운폰트적용*/

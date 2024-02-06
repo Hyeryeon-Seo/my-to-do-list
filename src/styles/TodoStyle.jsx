@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const BigBtn = styled.button`
@@ -24,6 +25,12 @@ export const TodoBox = styled.ul`
 	&:hover {
 		box-shadow: 0px 0px 3px 1px lightcoral;
 	}
+`;
+
+//NOTE - 스타일컴포넌트에서도 Link 는 임포트해와야함! & 괄호안에 쓰는거주의
+export const TodoLink = styled(Link)`
+	text-decoration: none;
+	color: black;
 `;
 
 export const TodoTextBox = styled.div`

@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as S from "../../styles/TodoStyle";
 
 function TodoItem(props) {
@@ -39,19 +39,24 @@ function TodoItem(props) {
 
 	return (
 		<S.TodoBox key={todo.id}>
-			<S.TodoTextBox type={type}>
-				<S.TodoTitle>{title}</S.TodoTitle>
-				<S.TodoContent>{content}</S.TodoContent>
-				<S.TodoDeadline>{deadlineText}</S.TodoDeadline>
-			</S.TodoTextBox>
-			<S.TodoBtnBox>
-				<S.BtnDelDone onClick={() => deleteTodoHandler(todo.id)} type="delete">
-					삭제
-				</S.BtnDelDone>
-				<S.BtnDelDone onClick={() => onToggleTodoItem(todo.id)} type="isDone">
-					{type === "working" ? "완료" : "완료 취소"}
-				</S.BtnDelDone>
-			</S.TodoBtnBox>
+			<S.TodoLink to={`${todo.id}`}>
+				<S.TodoTextBox type={type}>
+					<S.TodoTitle>{title}</S.TodoTitle>
+					<S.TodoContent>{content}</S.TodoContent>
+					<S.TodoDeadline>{deadlineText}</S.TodoDeadline>
+				</S.TodoTextBox>
+				<S.TodoBtnBox>
+					<S.BtnDelDone
+						onClick={() => deleteTodoHandler(todo.id)}
+						type="delete"
+					>
+						삭제
+					</S.BtnDelDone>
+					<S.BtnDelDone onClick={() => onToggleTodoItem(todo.id)} type="isDone">
+						{type === "working" ? "완료" : "완료 취소"}
+					</S.BtnDelDone>
+				</S.TodoBtnBox>
+			</S.TodoLink>
 		</S.TodoBox>
 	);
 }

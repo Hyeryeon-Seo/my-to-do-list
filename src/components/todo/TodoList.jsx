@@ -38,7 +38,6 @@ function TodoList({
 					return (
 						<TodoItem
 							type={type}
-							key={todo.id}
 							todo={todo}
 							title={todo.title}
 							content={todo.content}

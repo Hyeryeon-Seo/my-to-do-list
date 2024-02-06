@@ -9,18 +9,7 @@ const ListsSection = styled.section`
 	margin-top: 30px;
 `;
 
-function TodoController() {
-	const [todoList, setTodoList] = useState([
-		{
-			id: 0,
-			title: "리액트 강의 2회독하기",
-			content: "1월 내로 리액트 강의내용 내 걸로 만들기 !",
-			deadline: "마감일 : 2024-01-31",
-			isDone: false,
-		},
-	]);
-	// 입력한 to-do를 담을 상태
-
+function TodoController({ todoList, setTodoList }) {
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
 	const [deadline, setDeadline] = useState("");

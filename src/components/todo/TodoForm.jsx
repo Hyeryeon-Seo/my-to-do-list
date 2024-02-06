@@ -1,17 +1,6 @@
 import React from "react";
 import CustomInput from "../common/CustomInput";
-import styled from "styled-components";
-
-const AddBtn = styled.button`
-	background-color: rgb(253, 232, 250);
-	width: 150px;
-	height: 40px;
-	border: none;
-	margin-top: 10px;
-	&:hover {
-		box-shadow: 0px 0px 3px 1px lightcoral;
-	}
-`;
+import * as S from "../../styles/TodoStyle";
 
 function TodoForm({
 	onSubmit,
@@ -50,7 +39,7 @@ function TodoForm({
 			>
 				마감일
 			</CustomInput>
-			<AddBtn type="submit">추가하기</AddBtn>
+			<S.BigBtn type="submit">추가하기</S.BigBtn>
 		</form>
 	);
 }

@@ -53,8 +53,9 @@ function TodoController() {
 
 	// todoItem 정렬하는 함수
 	// 작동하지만 처음에 '빠른순'을 먼저 택하면 안먹힘 (느린순했다가 눌러야)
-	// 그런데 오름차순 asc가 마감일 느린순?
+	// 그런데 오름차순 asc가 마감일 느린순? (아마 카드가 왼쪽부터 추가되다보니 방향이 바뀌어서 그런게 아닐까 -> 상관없음)
 	// 마감일 입력x로 미정시, 그 카드들은 순서정렬자체가 안되는 문제 (그대로있음) -> 미정 시에도 9999-.. 날짜부여해서 해결
+	// useEffect 사용 가능
 	const sortTodoItems = () => {
 		const newOrderDeadline = [...todoList].sort((a, b) => {
 			if (sortOrder === "asc") {
@@ -71,8 +72,8 @@ function TodoController() {
 	const addTodoHandler = (newTodo) => {
 		// 개선: setTodoList([...todoList, newTodo]);도 기능은 잘 되지만, 빠르게 제출 시 에러날 수 있어서
 		// 그냥 todoList가 아닌, 버튼누른당시?의 prevTodoList를 넣어서 작동하게 한다 ?
-		// => set메서드 안 콜백함수로 처리 & 받은 newTodo를 맨 앞에 오도록 처리
-		setTodoList((prevTodoList) => [newTodo, ...prevTodoList]);
+		// => set메서드 안 콜백함수로 처리 & 받은 newTodo를 맨 앞에 오도록 처리 -> 변경
+		setTodoList((prevTodoList) => [...prevTodoList, newTodo]);
 	};
 
 	// form태그에 들어가는 함수: onSubmit

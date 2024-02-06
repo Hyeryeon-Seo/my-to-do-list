@@ -26,6 +26,8 @@ function TodoList({
 	children,
 	type,
 	todoList,
+	// deadlineText,
+	// setDeadlinetText,
 	deleteTodoHandler,
 	onToggleTodoItem,
 }) {
@@ -44,6 +46,8 @@ function TodoList({
 							deadline={todo.deadline}
 							deleteTodoHandler={deleteTodoHandler}
 							onToggleTodoItem={onToggleTodoItem}
+							// deadlineText={deadlineText}
+							// setDeadlinetText={setDeadlinetText}
 						/>
 					);
 				})}

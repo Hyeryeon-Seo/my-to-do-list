@@ -153,6 +153,8 @@ function TodoController({ todoList, setTodoList }) {
 					todoList={workingTodoList}
 					deleteTodoHandler={deleteTodoHandler}
 					onToggleTodoItem={onToggleTodoItem}
+					// deadlineText={deadlineText}
+					// setDeadlinetText={setDeadlinetText}
 				>
 					Working 🏃‍♀️
 				</TodoList>
@@ -161,6 +163,8 @@ function TodoController({ todoList, setTodoList }) {
 					todoList={doneTodoList}
 					deleteTodoHandler={deleteTodoHandler}
 					onToggleTodoItem={onToggleTodoItem}
+					// deadlineText={deadlineText}
+					// setDeadlinetText={setDeadlinetText}
 				>
 					Done 🎉
 				</TodoList>

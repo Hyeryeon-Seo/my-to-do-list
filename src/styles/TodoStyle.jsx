@@ -96,6 +96,7 @@ export const DetailWrapper = styled.div`
 export const TodoDetailBox = styled.div`
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	gap: 2rem;
 	word-wrap: break-word;
 `;

@@ -25,8 +25,16 @@ const Detail = ({ todoList }) => {
 					<S.TodoDetailBox>
 						<S.TodoTitle>{selectedTodo.title}</S.TodoTitle>
 						<S.TodoContent>{selectedTodo.content}</S.TodoContent>
-						<S.TodoDeadline>{selectedTodo.deadlineText}</S.TodoDeadline>
+						<S.TodoContent>
+							{selectedTodo.isDone ? "👍 완료 🎉" : "🏃‍♀️ 진행 중 🏃"}
+						</S.TodoContent>
 					</S.TodoDetailBox>
+					<S.TodoDeadline>
+						{selectedTodo.deadline === 9956
+							? //마감일 미정시 9999-12-31로 대충 날짜 설정했는데 9956숫자로 뜸
+							  "마감일 미정"
+							: `마감일 : ${selectedTodo.deadline}`}
+					</S.TodoDeadline>
 				</S.DetailBox>
 			</S.DetailWrapper>
 			<S.TodoBtnBox></S.TodoBtnBox>

@@ -173,8 +173,6 @@ table {
   min-height: 1000px;
   font-family: "Pretendard-Regular"; /*전체태그적용위해 필요*/
   background-color: rgb(250, 243, 231);
-  // 이렇게 해주니까, 전체 div에 css줬을떄와 달리, 배경색도 전체적으로 적용이 되었다
-  // (즉 가장큰 컨테이너크기가 넓어진, 감싸는?)
     }
 
   * {

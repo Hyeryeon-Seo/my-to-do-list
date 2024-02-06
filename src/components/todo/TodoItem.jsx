@@ -29,14 +29,6 @@ function TodoItem(props) {
 		deadlineText = dateDeadline + "까지";
 	}
 
-	// 클릭 시 상세페이지로 (id를 파라미터로)
-	// const onClickTodoHandler = (id) => {
-	// 	navigate(`/${id}`); // Router에서 /detail/..로 설정안했음 주의
-	// 	// Rotuer에서 지정한 /:todoId .. 파라미터명과일치해야하나? => 상관없음
-	// 	// 여기선 걍 받아오는 인자 id 가 navigate에 쓰이는 id 같으면 될 뿐
-	// 	// (여기서 todo.id 가 숫자더라도, 문자열로 들어가게된다 ``안)
-	// };
-
 	return (
 		<S.TodoBox key={todo.id}>
 			<S.TodoLink to={`${todo.id}`}>

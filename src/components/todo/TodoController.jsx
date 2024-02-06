@@ -102,10 +102,6 @@ function TodoController({ todoList, setTodoList }) {
 			setTitle(""); //초기화 - 개선: else케이스 안에 넣어서 추가(제출)되었을때만 초기화시킴
 			setContent("");
 			setDeadline("");
-			/* e.target.reset(); // 개선(다른방법): form태그 내 (제출시) input 초기화 _form태그로 가능한 메서드
-      근데 여기에 해도 밖에 해도 안 먹힌다, name도 부여해봤고 e.target.title.혹은 .value까지
-      해봤지만 실패 => 다시 setTitle 등을 쓰기로 했다
-      */
 		}
 	};
 
@@ -123,8 +119,6 @@ function TodoController({ todoList, setTodoList }) {
 		setTodoList((prevTodos) =>
 			prevTodos.map((todo) => {
 				if (todo.id === id) {
-					// console.log(todo.deadline);
-					//해봤더니 마감일미정시 9999-12-31 아니고 9956으로뜸.. ? (어쨋든 마감일미정 카드끼리 붙여놓기는 해결)
 					return { ...todo, isDone: !todo.isDone };
 				}
 				return todo;

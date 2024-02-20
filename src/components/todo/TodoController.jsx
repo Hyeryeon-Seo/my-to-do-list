@@ -1,27 +1,38 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import TodoForm from "./TodoForm";
 import CustomOrderSelect from "../common/CustomOrderSelect";
 import TodoList from "./TodoList";
 import styled from "styled-components";
+import {
+	createTodo,
+	deleteTodo,
+	getTodos,
+	updateTodo,
+} from "../../axios/todo-api";
+import { TodoContext } from "../../context/TodoContext";
+// 기존의 state ,  setTodos 등과 함께 헷갈림
 
-const ListsSection = styled.section`
-	max-height: 1000px;
-	margin-top: 30px;
-`;
+function TodoController() {
+	// + (기존 Router.jsx에서 [todoList, setTodolist] 로 useState사용하였으나)  - axios 사용하며 변경
+	const [todo, setTodo] = useState({
+		title: "",
+		content: "",
+		deadline: "",
+		isDone: false,
+	});
+	const { todos, setTodos } = useState(null);
+	// const { todos, setTodos } = useContext(TodoContext);
 
-function TodoController({ todoList, setTodoList }) {
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
 	const [deadline, setDeadline] = useState("");
-	const [sortOrder, setSortOrder] = useState("desc"); //초기설정 빠른순? 설정안됨
+	const [sortOrder, setSortOrder] = useState("desc");
 
 	// input의 value값 가져오기
-	// 개선: 이벤트핸들러함수명 컨벤션따라 변경
 	const handleTitleInputChange = (event) => {
 		setTitle(event.target.value);
 	};
 
-	// 개선: 이벤트핸들러함수명 컨벤션따라 변경
 	const handleContentInputChange = (event) => {
 		setContent(event.target.value);
 	};
@@ -46,7 +57,7 @@ function TodoController({ todoList, setTodoList }) {
 	// 마감일 입력x로 미정시, 그 카드들은 순서정렬자체가 안되는 문제 (그대로있음) -> 미정 시에도 9999-.. 날짜부여해서 해결
 	// useEffect 사용 가능
 	const sortTodoItems = () => {
-		const newOrderDeadline = [...todoList].sort((a, b) => {
+		const newOrderDeadline = [...todos].sort((a, b) => {
 			if (sortOrder === "asc") {
 				// 다시 체크
 				return new Date(a.deadline) - new Date(b.deadline);
@@ -54,15 +65,12 @@ function TodoController({ todoList, setTodoList }) {
 				return new Date(b.deadline) - new Date(a.deadline);
 			}
 		});
-		setTodoList(newOrderDeadline); // 정렬된 todoitem으로 todolist 상태 업데이트
+		setTodos(newOrderDeadline); // 정렬된 todoitem으로 todolist 상태 업데이트
 	};
 
 	// 추가하기 버튼 addTodoHandler
 	const addTodoHandler = (newTodo) => {
-		// 개선: setTodoList([...todoList, newTodo]);도 기능은 잘 되지만, 빠르게 제출 시 에러날 수 있어서
-		// 그냥 todoList가 아닌, 버튼누른당시?의 prevTodoList를 넣어서 작동하게 한다 ?
-		// => set메서드 안 콜백함수로 처리 & 받은 newTodo를 맨 앞에 오도록 처리 -> 변경
-		setTodoList((prevTodoList) => [...prevTodoList, newTodo]);
+		setTodos((prevTodos) => [...prevTodos, newTodo]); // +axios / but setTodos 등 todos state도 같이 바꿔줘야 화면에 렌더링!
 	};
 
 	// form태그에 들어가는 함수: onSubmit
@@ -75,49 +83,54 @@ function TodoController({ todoList, setTodoList }) {
 		// 개선: 유효성 검사 추가
 		if (!title || !content) {
 			alert("제목과 내용 모두 입력해주세요");
-			// 이 경우 초기화없이 입력내용 유지시킴
 			return;
 		} else if (!deadline) {
 			// 추가
-			// 마감일 설정 안해도, 아래처럼 날짜로 넣어줘야 순서정렬 시 문제 x
-			// 근데 왜인지 느린순하면 가장 나중에 뜨고, 빠른순하면 가장 먼저 뜬다..
-			addTodoHandler({
+			const newTodo = {
 				id: crypto.randomUUID(),
 				title,
 				content,
 				deadline: 9999 - 12 - 31,
 				isDone: false,
-			});
+			};
+			addTodoHandler(newTodo);
 			setTitle("");
 			setContent("");
 			setDeadline("");
+			createTodo(newTodo); // + axios api - 서버에
 		} else {
-			addTodoHandler({
-				id: crypto.randomUUID(), // id: todoList.length -id 중복 가능성 -> 개선: 고유한id부여- Date.now()도 가능 & crypto.randomUUID() 사용
-				title, // input에 입력된 title,body - setTitle,setBody로 title,body 설정됨 (초기값에서)
+			const newTodo = {
+				id: crypto.randomUUID(),
+				title,
 				content,
 				deadline,
 				isDone: false,
-			});
+			};
+			addTodoHandler(newTodo);
 			setTitle(""); //초기화 - 개선: else케이스 안에 넣어서 추가(제출)되었을때만 초기화시킴
 			setContent("");
 			setDeadline("");
+			createTodo(newTodo); // + axios api - 서버에
 		}
+		getTodos(); // 상태 업데이트 (setTodos([...todos, todo] 할수도있지만))
 	};
 
 	// 삭제 버튼: filter메서드로 해당id의 카드빼기
 	const deleteTodoHandler = (id) => {
-		setTodoList((prevTodoList) =>
-			prevTodoList.filter((todo) => todo.id !== id)
-		); // 개선: setTodoList()안 콜백함수 (에러방지)
+		deleteTodo(id); // 서버의 todo항목 삭제
+		setTodos(
+			// 클라이언트 상태에서도 제거?
+			todos.filter((item) => {
+				return item.id !== id;
+			})
+		);
 	};
 
 	// Done 완료&완료취소 버튼 (토글)=> 해당id의 todo 의 key값, isDone의 value값을 false <-> true 로 변경해야
-	const onToggleTodoItem = (id) => {
-		// 개선: 위와 마찬가지로 set..()안 콜백함수 /
-
-		setTodoList((prevTodos) =>
-			prevTodos.map((todo) => {
+	const onToggleTodoItem = (id, todo) => {
+		updateTodo(id, todo);
+		setTodos((prevTodos) =>
+			prevTodos?.map((todo) => {
 				if (todo.id === id) {
 					return { ...todo, isDone: !todo.isDone };
 				}
@@ -126,8 +139,16 @@ function TodoController({ todoList, setTodoList }) {
 		);
 	};
 
-	const workingTodoList = todoList.filter((todo) => todo.isDone === false);
-	const doneTodoList = todoList.filter((todo) => todo.isDone === true);
+	const workingTodoList = todos?.filter((todo) => todo.isDone === false);
+	const doneTodoList = todos?.filter((todo) => todo.isDone === true);
+
+	// + axios
+	// db로 부터 값 가져오기
+	useEffect(() => {
+		const data = getTodos();
+		getTodos();
+		setTodos(data);
+	}, []);
 
 	return (
 		<main>
@@ -164,7 +185,7 @@ function TodoController({ todoList, setTodoList }) {
 					deleteTodoHandler={deleteTodoHandler}
 					onToggleTodoItem={onToggleTodoItem}
 					// deadlineText={deadlineText}
-					// setDeadlinetText={setDeadlinetText}
+					// setDeadlinetText={setDeadlineText}
 				>
 					Done 🎉
 				</TodoList>
@@ -174,3 +195,8 @@ function TodoController({ todoList, setTodoList }) {
 }
 
 export default TodoController;
+
+const ListsSection = styled.section`
+	max-height: 1000px;
+	margin-top: 30px;
+`;

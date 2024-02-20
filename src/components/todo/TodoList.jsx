@@ -36,7 +36,7 @@ function TodoList({
 			<ListTitle>{children}</ListTitle>
 			<hr />
 			<List>
-				{todoList.map((todo) => {
+				{todoList?.map((todo) => {
 					return (
 						<TodoItem
 							type={type}

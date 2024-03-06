@@ -8,6 +8,13 @@
 
 <br>
 
+### Branches
+- **main** : props-drilling / 디자인: styled-components  활용
+- **json-server/axios** : json-server, axios 활용 시도
+
+  <br>
+------------
+
 ## 📌 기능 구현 상태
 
 - 추가하기 버튼 기능 구현 완료
